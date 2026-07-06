@@ -75,7 +75,7 @@ export default function CapabilityGrid() {
                     </div>
                     <p className="truncate text-[12px] text-ink-muted">{item.preview}</p>
                   </div>
-                  <span className="shrink-0 text-[11px] text-ink-muted">{item.channel} · {item.time}</span>
+                  <span className="shrink-0 text-[12px] text-ink-muted">{item.channel} · {item.time}</span>
                 </div>
               ))}
             </div>
@@ -96,31 +96,31 @@ export default function CapabilityGrid() {
                   <p className="text-[14px] font-semibold text-ink">Alex Chen</p>
                   <p className="text-[12px] text-ink-muted">Lead · Created 15m ago</p>
                 </div>
-                <span className="rounded-md bg-violet-surface px-2 py-0.5 text-[11px] font-semibold text-primary">Score 92</span>
+                <span className="rounded-md bg-violet-surface px-2 py-0.5 text-[12px] font-semibold text-primary">Score 92</span>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3">
                 <div>
-                  <span className="text-[11px] text-ink-muted">Intent</span>
+                  <span className="text-[12px] text-ink-muted">Intent</span>
                   <p className="text-[13px] font-semibold text-success">High</p>
                 </div>
                 <div>
-                  <span className="text-[11px] text-ink-muted">Lead stage</span>
+                  <span className="text-[12px] text-ink-muted">Lead stage</span>
                   <p className="text-[13px] font-semibold text-primary">Qualified</p>
                 </div>
                 <div>
-                  <span className="text-[11px] text-ink-muted">Owner</span>
+                  <span className="text-[12px] text-ink-muted">Owner</span>
                   <p className="text-[13px] font-medium text-ink">AI Agent</p>
                 </div>
                 <div>
-                  <span className="text-[11px] text-ink-muted">Source</span>
+                  <span className="text-[12px] text-ink-muted">Source</span>
                   <p className="text-[13px] font-medium text-ink">TikTok</p>
                 </div>
                 <div>
-                  <span className="text-[11px] text-ink-muted">Campaign</span>
+                  <span className="text-[12px] text-ink-muted">Campaign</span>
                   <p className="text-[13px] font-medium text-primary">Summer 2026</p>
                 </div>
                 <div>
-                  <span className="text-[11px] text-ink-muted">Next action</span>
+                  <span className="text-[12px] text-ink-muted">Next action</span>
                   <p className="text-[13px] font-medium text-ink">Schedule demo</p>
                 </div>
               </div>
@@ -175,7 +175,7 @@ export default function CapabilityGrid() {
                           action.done ? 'border-success/20 bg-success/5' : 'border-line bg-surface-2/30 opacity-60'
                         }`}>
                           <Icon className={`h-3 w-3 ${action.done ? 'text-success' : 'text-ink-muted'}`} />
-                          <span className={`text-[11px] font-medium ${action.done ? 'text-ink' : 'text-ink-secondary'}`}>{action.label}</span>
+                          <span className={`text-[12px] font-medium ${action.done ? 'text-ink' : 'text-ink-secondary'}`}>{action.label}</span>
                           {action.done && <CheckCircle2 className="ml-auto h-2.5 w-2.5 text-success" />}
                         </div>
                       )
@@ -229,7 +229,7 @@ export default function CapabilityGrid() {
                     'bg-ink-muted'
                   }`} />
                   <span className={`text-[13px] font-medium ${step.status === 'pending' ? 'text-ink-muted' : 'text-ink'}`}>{step.label}</span>
-                  <span className={`ml-auto text-[11px] font-medium ${
+                  <span className={`ml-auto text-[12px] font-medium ${
                     step.status === 'active' ? 'text-primary' : 'text-ink-muted'
                   }`}>{step.time}</span>
                 </div>
@@ -270,8 +270,8 @@ export default function CapabilityGrid() {
                          <Smartphone className="h-4 w-4" />}
                       </div>
                       <span className={`mt-2 text-[12px] font-medium ${step.status === 'scheduled' ? 'text-ink-muted' : 'text-ink'}`}>{step.name}</span>
-                      <span className="text-[11px] text-ink-muted">{step.channel}</span>
-                      <span className={`text-[10px] font-medium ${
+                      <span className="text-[12px] text-ink-muted">{step.channel}</span>
+                      <span className={`text-[11px] font-medium ${
                         step.status === 'sent' ? 'text-success' :
                         step.status === 'ready' ? 'text-primary' : 'text-ink-muted'
                       }`}>{step.status}</span>

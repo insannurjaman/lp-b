@@ -91,9 +91,9 @@ function WorkspaceFrame() {
         </div>
         <div className="flex items-center gap-2">
           <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10">
-            <span className="text-[10px] font-bold text-primary">B</span>
+            <span className="text-[11px] font-bold text-primary">B</span>
           </div>
-          <span className="text-[13px] font-medium text-ink-secondary">base360</span>
+          <span className="text-[13px] font-medium text-ink-secondary">Base360</span>
         </div>
         <div className="hidden sm:block">
           <span className="text-[12px] text-ink-muted">Workspace</span>
@@ -118,7 +118,7 @@ function WorkspaceFrame() {
             <div className="border-b border-line px-4 py-3">
               <div className="flex items-center justify-between">
                 <p className="text-[13px] font-semibold uppercase tracking-wider text-ink-muted">Inbox</p>
-                <span className="rounded-md bg-violet-surface px-1.5 py-0.5 text-[11px] font-semibold text-primary">{conversations.length}</span>
+                <span className="rounded-md bg-violet-surface px-1.5 py-0.5 text-[12px] font-semibold text-primary">{conversations.length}</span>
               </div>
             </div>
             <div className="divide-y divide-line">
@@ -136,7 +136,7 @@ function WorkspaceFrame() {
                       </div>
                       <p className="truncate text-[12px] text-ink-muted">{c.preview}</p>
                     </div>
-                    <span className="shrink-0 text-[11px] text-ink-muted">{c.time}</span>
+                    <span className="shrink-0 text-[12px] text-ink-muted">{c.time}</span>
                   </div>
                 )
               })}
@@ -153,7 +153,7 @@ function WorkspaceFrame() {
                   <span className="text-[12px] text-ink-muted">TikTok → Instagram DM</span>
                 </div>
               </div>
-              <span className="rounded-md bg-violet-surface px-2 py-0.5 text-[11px] font-medium text-primary">High intent</span>
+              <span className="rounded-md bg-violet-surface px-2 py-0.5 text-[12px] font-medium text-primary">High intent</span>
             </div>
 
             <div className="space-y-3 p-4">
@@ -161,21 +161,21 @@ function WorkspaceFrame() {
                 <div className="rounded-xl rounded-bl-sm bg-surface-2 px-3.5 py-2.5">
                   <p className="text-[14px] text-ink">How much is this?</p>
                 </div>
-                <p className="mt-1 text-[11px] text-ink-muted">Alex · TikTok · 2m ago</p>
+                <p className="mt-1 text-[12px] text-ink-muted">Alex · TikTok · 2m ago</p>
               </div>
 
               <div className="ml-auto max-w-[88%]">
                 <div className="rounded-xl rounded-br-sm bg-violet-surface px-3.5 py-2.5">
                   <p className="text-[14px] text-ink">Hi Alex! I&apos;ve sent the pricing details to your DMs. Let me know which option looks best.</p>
                 </div>
-                <p className="mt-1 text-right text-[11px] text-ink-muted">Base360 AI · 1m ago</p>
+                <p className="mt-1 text-right text-[12px] text-ink-muted">Base360 AI · 1m ago</p>
               </div>
 
               <div className="max-w-[88%]">
                 <div className="rounded-xl rounded-bl-sm bg-surface-2 px-3.5 py-2.5">
                   <p className="text-[14px] text-ink">The pro plan looks good. Is it available?</p>
                 </div>
-                <p className="mt-1 text-[11px] text-ink-muted">Alex · Instagram DM · now</p>
+                <p className="mt-1 text-[12px] text-ink-muted">Alex · Instagram DM · now</p>
               </div>
 
               <div className="rounded-lg border border-primary/20 bg-violet-surface/40 p-3.5">
@@ -184,7 +184,7 @@ function WorkspaceFrame() {
                     <Bot className="h-4 w-4 text-primary" />
                   </div>
                   <span className="text-[13px] font-semibold text-primary">AI suggestion</span>
-                  <span className="ml-auto rounded-md bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">Score 92</span>
+                  <span className="ml-auto rounded-md bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">Score 92</span>
                 </div>
                 <p className="mt-2 text-[13px] leading-relaxed text-ink-secondary">
                   Reply with feature comparison and check availability. High buying intent detected — recommend scheduling a demo.
@@ -219,7 +219,7 @@ function WorkspaceFrame() {
             </div>
 
             <div className="mt-4 rounded-lg border border-primary/20 bg-violet-surface/30 p-3">
-              <p className="mb-1 text-[11px] font-medium text-ink-muted">Next action</p>
+              <p className="mb-1 text-[12px] font-medium text-ink-muted">Next action</p>
               <div className="flex items-center gap-1.5">
                 <ArrowRight className="h-3.5 w-3.5 text-primary" />
                 <span className="text-[13px] font-medium text-primary">Schedule demo call</span>
@@ -239,7 +239,7 @@ function WorkspaceFrame() {
                     </div>
                     <div className="flex-1">
                       <p className={`text-[13px] ${evt.done ? 'text-ink' : 'text-ink-secondary'}`}>{evt.action}</p>
-                      <p className="text-[11px] text-ink-muted">{evt.time}</p>
+                      <p className="text-[12px] text-ink-muted">{evt.time}</p>
                     </div>
                   </div>
                 )

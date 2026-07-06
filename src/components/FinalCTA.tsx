@@ -66,19 +66,19 @@ export default function FinalCTA() {
                 {/* Outcome summary */}
                 <div className="mt-4 grid grid-cols-2 gap-3">
                   <div className="rounded-lg border border-line bg-surface p-3">
-                    <span className="text-[11px] text-ink-muted">Source</span>
+                    <span className="text-[12px] text-ink-muted">Source</span>
                     <p className="text-[13px] font-medium text-ink">TikTok</p>
                   </div>
                   <div className="rounded-lg border border-line bg-surface p-3">
-                    <span className="text-[11px] text-ink-muted">Intent</span>
+                    <span className="text-[12px] text-ink-muted">Intent</span>
                     <p className="text-[13px] font-semibold text-success">High</p>
                   </div>
                   <div className="rounded-lg border border-line bg-surface p-3">
-                    <span className="text-[11px] text-ink-muted">Lead stage</span>
+                    <span className="text-[12px] text-ink-muted">Lead stage</span>
                     <p className="text-[13px] font-semibold text-primary">Customer</p>
                   </div>
                   <div className="rounded-lg border border-line bg-surface p-3">
-                    <span className="text-[11px] text-ink-muted">Campaign</span>
+                    <span className="text-[12px] text-ink-muted">Campaign</span>
                     <p className="text-[13px] font-medium text-ink">Completed</p>
                   </div>
                 </div>

@@ -37,15 +37,15 @@ export default function CustomerHistory() {
               </div>
               <div className="mt-5 grid grid-cols-3 gap-4 border-t border-line pt-4">
                 <div>
-                  <span className="text-[11px] text-ink-muted">Intent</span>
+                  <span className="text-[12px] text-ink-muted">Intent</span>
                   <p className="text-[14px] font-semibold text-success">High</p>
                 </div>
                 <div>
-                  <span className="text-[11px] text-ink-muted">Score</span>
+                  <span className="text-[12px] text-ink-muted">Score</span>
                   <p className="text-[14px] font-semibold text-primary">92</p>
                 </div>
                 <div>
-                  <span className="text-[11px] text-ink-muted">Channels</span>
+                  <span className="text-[12px] text-ink-muted">Channels</span>
                   <p className="text-[14px] font-semibold text-ink">4</p>
                 </div>
               </div>
@@ -93,8 +93,8 @@ export default function CustomerHistory() {
                       isWon ? 'border-success/20 bg-success/5' : 'border-line bg-surface'
                     }`}>
                       <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">{evt.channel}</span>
-                        <span className="text-[11px] text-ink-muted">· {evt.time}</span>
+                        <span className="text-[12px] font-semibold uppercase tracking-wider text-ink-muted">{evt.channel}</span>
+                        <span className="text-[12px] text-ink-muted">· {evt.time}</span>
                       </div>
                       <p className="mt-0.5 text-[14px] font-semibold text-ink">{evt.action}</p>
                       <p className="mt-0.5 text-[13px] text-ink-secondary">{evt.detail}</p>

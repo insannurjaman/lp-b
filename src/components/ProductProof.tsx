@@ -52,7 +52,7 @@ export default function ProductProof() {
                       <div className="flex h-14 w-14 items-center justify-center rounded-full border border-line bg-surface shadow-card">
                         <Icon className="h-5 w-5 text-primary" />
                       </div>
-                      <span className="mt-3 text-[11px] font-semibold uppercase tracking-wider text-ink-muted">{step.number}</span>
+                      <span className="mt-3 text-[12px] font-semibold uppercase tracking-wider text-ink-muted">{step.number}</span>
                       <p className="mt-1 text-[13px] font-semibold text-ink">{step.title}</p>
                       <p className="mt-1 text-[12px] leading-relaxed text-ink-secondary">{step.description}</p>
                     </motion.div>
@@ -88,7 +88,7 @@ export default function ProductProof() {
                     {/* Text */}
                     <div className="pt-1.5 pb-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">{step.number}</span>
+                        <span className="text-[12px] font-semibold uppercase tracking-wider text-ink-muted">{step.number}</span>
                       </div>
                       <p className="mt-0.5 text-[15px] font-semibold text-ink">{step.title}</p>
                       <p className="mt-1 text-[14px] leading-relaxed text-ink-secondary">{step.description}</p>

@@ -232,21 +232,21 @@ export function OrbitSuccess({ person, initials, score, campaign }: OrbitSuccess
         </div>
         <div>
           <p className="text-[14px] font-semibold text-ink">{person}</p>
-          <span className="text-[11px] text-ink-muted">Customer</span>
+          <span className="text-[12px] text-ink-muted">Customer</span>
         </div>
-        <span className="ml-auto rounded-md bg-success/15 px-2 py-0.5 text-[11px] font-medium text-success">Won</span>
+        <span className="ml-auto rounded-md bg-success/15 px-2 py-0.5 text-[12px] font-medium text-success">Won</span>
       </div>
       {(score || campaign) && (
         <div className="grid grid-cols-2 gap-x-3 gap-y-2">
           {score && (
             <div>
-              <span className="text-[10px] text-ink-muted">Lead score</span>
+              <span className="text-[11px] text-ink-muted">Lead score</span>
               <p className="text-[13px] font-semibold text-primary">{score}</p>
             </div>
           )}
           {campaign && (
             <div>
-              <span className="text-[10px] text-ink-muted">Campaign</span>
+              <span className="text-[11px] text-ink-muted">Campaign</span>
               <p className="text-[13px] font-medium text-ink">{campaign}</p>
             </div>
           )}
@@ -254,7 +254,7 @@ export function OrbitSuccess({ person, initials, score, campaign }: OrbitSuccess
       )}
       <div className="mt-3 flex items-center gap-1.5 border-t border-success/20 pt-2.5">
         <CheckCircle2 className="h-3.5 w-3.5 text-success" />
-        <span className="text-[11px] font-medium text-success">Customer created</span>
+        <span className="text-[12px] font-medium text-success">Customer created</span>
       </div>
     </div>
   )
