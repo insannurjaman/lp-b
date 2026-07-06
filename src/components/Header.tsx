@@ -11,20 +11,28 @@ const links = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [darkBg, setDarkBg] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60)
+    const handleScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 40)
+      const darkSections = document.querySelectorAll('#actions, #capabilities')
+      let overDark = false
+      darkSections.forEach((s) => {
+        const rect = s.getBoundingClientRect()
+        if (rect.top < 80 && rect.bottom > 0) overDark = true
+      })
+      setDarkBg(overDark && y > 100)
+    }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    if (menuOpen) { document.body.style.overflow = 'hidden' }
+    else { document.body.style.overflow = '' }
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
@@ -37,15 +45,21 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-cream/90 backdrop-blur-md shadow-sm shadow-black/5' : 'bg-transparent'
+        darkBg
+          ? 'bg-base-950/90 backdrop-blur-md'
+          : scrolled
+            ? 'bg-cream/90 backdrop-blur-md shadow-sm shadow-black/5'
+            : 'bg-transparent'
       }`}
     >
       <Container>
-        <nav className="flex h-16 items-center justify-between" aria-label="Main navigation">
+        <nav className="flex h-14 items-center justify-between md:h-15" aria-label="Main navigation">
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-            className="font-heading text-base font-semibold tracking-tight text-dark-text"
+            className={`font-heading text-sm font-semibold tracking-tight transition-colors ${
+              darkBg ? 'text-dark-mode-text' : 'text-dark-text'
+            }`}
           >
             BASE360
           </a>
@@ -56,7 +70,9 @@ export default function Header() {
                 <a
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-                  className="text-sm font-medium text-muted transition-colors hover:text-dark-text"
+                  className={`text-sm font-medium transition-colors ${
+                    darkBg ? 'text-dark-mode-secondary hover:text-dark-mode-text' : 'text-muted hover:text-dark-text'
+                  }`}
                 >
                   {link.label}
                 </a>
@@ -76,7 +92,9 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="flex items-center justify-center rounded-lg p-2 text-dark-text md:hidden cursor-pointer"
+            className={`flex items-center justify-center rounded-lg p-2 md:hidden cursor-pointer ${
+              darkBg ? 'text-dark-mode-text' : 'text-dark-text'
+            }`}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >

@@ -55,6 +55,21 @@
   text-wrap: balance;
 }
 
+@utility anchor {
+  scroll-margin-top: 80px;
+}
+
+@layer utilities {
+  .signal-incoming { color: #5c4bff; }
+  .signal-active { color: #5c4bff; filter: drop-shadow(0 0 8px rgba(92,75,255,0.4)); }
+  .signal-completed { color: #a6f4c5; }
+  .signal-path { stroke: #5c4bff; stroke-width: 1.5; fill: none; stroke-linecap: round; }
+  .signal-dot { fill: #5c4bff; }
+  .signal-dot-active { fill: #5c4bff; filter: drop-shadow(0 0 6px rgba(92,75,255,0.5)); }
+  .signal-dot-completed { fill: #a6f4c5; }
+  .signal-dot-inactive { fill: rgba(255,255,255,0.15); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
