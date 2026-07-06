@@ -1,11 +1,9 @@
 import Header from './components/Header'
-import Hero from './components/Hero'
-import ChannelCoverage from './components/ChannelCoverage'
-import ProblemSection from './components/ProblemSection'
-import JourneySection from './components/JourneySection'
-import ProductPillars from './components/ProductPillars'
-import CustomerTimeline from './components/CustomerTimeline'
-import FinalCTA from './components/FinalCTA'
+import HeroSection from './components/HeroSection'
+import SixActions from './components/SixActions'
+import Workspace from './components/Workspace'
+import Capabilities from './components/Capabilities'
+import Closing from './components/Closing'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -13,13 +11,11 @@ export default function App() {
     <>
       <Header />
       <main>
-        <Hero />
-        <ChannelCoverage />
-        <ProblemSection />
-        <JourneySection />
-        <ProductPillars />
-        <CustomerTimeline />
-        <FinalCTA />
+        <HeroSection />
+        <SixActions />
+        <Workspace />
+        <Capabilities />
+        <Closing />
       </main>
       <Footer />
     </>
