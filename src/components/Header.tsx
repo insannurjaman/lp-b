@@ -1,144 +1,88 @@
-import { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-import Container from './Container'
-
-const links = [
-  { label: 'Product', href: '#capabilities' },
-  { label: 'How it works', href: '#actions' },
-  { label: 'Platform', href: '#workspace' },
-]
+import { useState, useEffect } from 'react'
+import { Menu } from 'lucide-react'
+import Base360PlatformMark from './Base360PlatformMark'
+import MobileNavigation from './MobileNavigation'
+import { navItems } from '../data/content'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
-  const [darkBg, setDarkBg] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY
-      setScrolled(y > 40)
-      const darkSections = document.querySelectorAll('#actions, #capabilities')
-      let overDark = false
-      darkSections.forEach((s) => {
-        const rect = s.getBoundingClientRect()
-        if (rect.top < 80 && rect.bottom > 0) overDark = true
-      })
-      setDarkBg(overDark && y > 100)
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 12)
+    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    if (menuOpen) { document.body.style.overflow = 'hidden' }
-    else { document.body.style.overflow = '' }
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
-
-  const scrollTo = useCallback((href: string) => {
-    setMenuOpen(false)
-    const target = document.querySelector(href)
-    if (target) target.scrollIntoView({ behavior: 'smooth' })
-  }, [])
+  const handleNavClick = (href: string) => (e: React.MouseEvent) => {
+    if (href.startsWith('#')) {
+      e.preventDefault()
+      const target = document.querySelector(href)
+      if (target) target.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        darkBg
-          ? 'bg-base-950/90 backdrop-blur-md'
-          : scrolled
-            ? 'bg-cream/90 backdrop-blur-md shadow-sm shadow-black/5'
-            : 'bg-transparent'
-      }`}
-    >
-      <Container>
-        <nav className="flex h-14 items-center justify-between md:h-15" aria-label="Main navigation">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-            className={`font-heading text-sm font-semibold tracking-tight transition-colors ${
-              darkBg ? 'text-dark-mode-text' : 'text-dark-text'
+    <>
+      <div className="fixed inset-x-0 top-0 z-30 pt-4 px-4 sm:pt-5 sm:px-6 lg:pt-6">
+        <div className="mx-auto max-w-[1240px]">
+          <header
+            className={`flex items-center justify-between rounded-[14px] border transition-all duration-300 ${
+              scrolled
+                ? 'border-line bg-surface/85 shadow-nav backdrop-blur-xl'
+                : 'border-line/60 bg-surface/60 backdrop-blur-md'
             }`}
+            style={{ minHeight: '60px' }}
           >
-            BASE360
-          </a>
+            {/* Left: logo */}
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+              className="flex items-center gap-2.5 pl-4 sm:pl-5"
+              aria-label="Base360 home"
+            >
+              <Base360PlatformMark size={30} />
+              <span className="font-heading text-[17px] font-semibold tracking-tight text-ink">Base360</span>
+            </a>
 
-          <ul className="hidden items-center gap-8 md:flex">
-            {links.map((link) => (
-              <li key={link.href}>
+            {/* Center: nav links (desktop) */}
+            <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+              {navItems.map((item) => (
                 <a
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-                  className={`text-sm font-medium transition-colors ${
-                    darkBg ? 'text-dark-mode-secondary hover:text-dark-mode-text' : 'text-muted hover:text-dark-text'
-                  }`}
+                  key={item.label}
+                  href={item.href}
+                  onClick={handleNavClick(item.href)}
+                  className="rounded-lg px-3.5 py-2 text-[14px] font-medium text-ink-secondary transition-colors hover:text-ink"
                 >
-                  {link.label}
+                  {item.label}
                 </a>
-              </li>
-            ))}
-            <li>
+              ))}
+            </nav>
+
+            {/* Right: CTA + mobile menu */}
+            <div className="flex items-center gap-2 pr-2 sm:pr-3">
               <a
-                href="#closing"
-                onClick={(e) => { e.preventDefault(); scrollTo('#closing') }}
-                className="inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-primary/90"
+                href="#contact"
+                onClick={handleNavClick('#contact')}
+                className="hidden lg:inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-[14px] font-medium text-white transition-colors hover:bg-primary-hover"
               >
                 Request early access
               </a>
-            </li>
-          </ul>
-
-          <button
-            type="button"
-            onClick={() => setMenuOpen(!menuOpen)}
-            className={`flex items-center justify-center rounded-lg p-2 md:hidden cursor-pointer ${
-              darkBg ? 'text-dark-mode-text' : 'text-dark-text'
-            }`}
-            aria-expanded={menuOpen}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          >
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </nav>
-      </Container>
-
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.15 }}
-            className="border-t border-border bg-cream md:hidden"
-          >
-            <Container className="py-6">
-              <ul className="flex flex-col gap-1">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-                      className="block rounded-lg px-4 py-3 text-base font-medium text-muted transition-colors hover:bg-soft-violet/30 hover:text-dark-text"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-4 px-4">
-                <a
-                  href="#closing"
-                  onClick={(e) => { e.preventDefault(); scrollTo('#closing') }}
-                  className="flex w-full items-center justify-center rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
-                >
-                  Request early access
-                </a>
-              </div>
-            </Container>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+              <button
+                onClick={() => setMenuOpen(true)}
+                className="flex h-11 w-11 items-center justify-center rounded-xl text-ink transition-colors hover:bg-surface-2 lg:hidden"
+                aria-label="Open menu"
+                aria-expanded={menuOpen}
+                aria-controls="mobile-nav"
+              >
+                <Menu className="h-5 w-5" />
+              </button>
+            </div>
+          </header>
+        </div>
+      </div>
+      <MobileNavigation open={menuOpen} onClose={() => setMenuOpen(false)} />
+    </>
   )
 }

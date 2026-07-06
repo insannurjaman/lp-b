@@ -1,7 +1,7 @@
 import { useState, useId } from 'react'
 import { Check, ArrowRight } from 'lucide-react'
 
-export default function EmailCaptureForm() {
+export default function EarlyAccessForm() {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [submitted, setSubmitted] = useState(false)
@@ -17,20 +17,27 @@ export default function EmailCaptureForm() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     const err = validate(email)
-    if (err) { setError(err); return }
+    if (err) {
+      setError(err)
+      return
+    }
     setError('')
     setSubmitted(true)
   }
 
   if (submitted) {
     return (
-      <div className="flex items-center gap-4 rounded-xl border border-success/20 bg-success/5 px-6 py-5" role="status" aria-live="polite">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-success/20">
-          <Check className="h-5 w-5 text-success" aria-hidden="true" />
+      <div
+        className="flex items-center gap-3 rounded-xl border border-success/30 bg-success/5 px-4 py-3.5"
+        role="status"
+        aria-live="polite"
+      >
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-success/15">
+          <Check className="h-4 w-4 text-success" />
         </div>
-        <div>
-          <p className="text-sm font-medium text-dark-mode-text">You&apos;re on the list</p>
-          <p className="text-xs text-dark-mode-secondary/60">We&apos;ll be in touch when Base360 is ready for early access.</p>
+        <div className="text-left">
+          <p className="text-[14px] font-medium text-ink">You&apos;re on the list</p>
+          <p className="text-[12px] text-ink-secondary">We&apos;ll reach out when Base360 is ready for early access.</p>
         </div>
       </div>
     )
@@ -38,7 +45,7 @@ export default function EmailCaptureForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="w-full">
-      <div className="flex flex-col gap-3 sm:flex-row">
+      <div className="flex flex-col gap-2.5 sm:flex-row">
         <div className="relative flex-1">
           <label htmlFor={inputId} className="sr-only">Work email</label>
           <input
@@ -49,19 +56,21 @@ export default function EmailCaptureForm() {
             placeholder="Enter your work email"
             aria-invalid={!!error}
             aria-describedby={error ? feedbackId : undefined}
-            className="w-full rounded-xl border border-dark-text/15 bg-white px-4 py-3.5 text-sm text-dark-text placeholder-muted/50 transition-all focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/10"
+            className={`w-full rounded-xl border bg-surface px-4 py-3.5 text-[15px] text-ink placeholder-ink-muted transition-all focus:outline-none focus:ring-2 focus:ring-primary/10 ${
+              error ? 'border-error focus:border-error' : 'border-line focus:border-primary/50'
+            }`}
           />
         </div>
         <button
           type="submit"
-          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-dark-text px-7 py-3.5 text-sm font-medium text-white transition-all hover:bg-dark-text/90 cursor-pointer"
+          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-[15px] font-medium text-white shadow-card transition-all hover:bg-primary-hover hover:shadow-float"
         >
           Request early access
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          <ArrowRight className="h-4 w-4" />
         </button>
       </div>
       <div id={feedbackId} role="alert" aria-live="polite" className="mt-2 min-h-[1.25rem]">
-        {error && <p className="text-sm text-primary">{error}</p>}
+        {error && <p className="text-[13px] text-error">{error}</p>}
       </div>
     </form>
   )

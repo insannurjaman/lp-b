@@ -1,9 +1,11 @@
 import Header from './components/Header'
-import HeroSection from './components/HeroSection'
-import SixActions from './components/SixActions'
-import Workspace from './components/Workspace'
-import Capabilities from './components/Capabilities'
-import Closing from './components/Closing'
+import Hero from './components/Hero'
+import ProductProof from './components/ProductProof'
+import ProductWorkspace from './components/ProductWorkspace'
+import Benefits from './components/Benefits'
+import CapabilityGrid from './components/CapabilityGrid'
+import AutomationJourney from './components/AutomationJourney'
+import FinalCTA from './components/FinalCTA'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -11,11 +13,13 @@ export default function App() {
     <>
       <Header />
       <main>
-        <HeroSection />
-        <SixActions />
-        <Workspace />
-        <Capabilities />
-        <Closing />
+        <Hero />
+        <ProductProof />
+        <ProductWorkspace />
+        <Benefits />
+        <CapabilityGrid />
+        <AutomationJourney />
+        <FinalCTA />
       </main>
       <Footer />
     </>

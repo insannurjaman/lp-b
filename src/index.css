@@ -1,23 +1,52 @@
 @import "tailwindcss";
 
 @theme {
+  /* Typography */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Instrument Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  --color-base-950: #0d0d14;
-  --color-base-900: #171720;
-  --color-primary: #5c4bff;
-  --color-signal: #897eff;
-  --color-soft-violet: #e2deff;
-  --color-cream: #f3f1ec;
-  --color-white: #ffffff;
-  --color-dark-text: #111116;
-  --color-dark-mode-text: #f0eff2;
-  --color-dark-mode-secondary: #9490a0;
-  --color-muted: #6e6b72;
-  --color-success: #a6f4c5;
-  --color-border: rgba(17, 17, 22, 0.12);
-  --color-border-dark: rgba(255, 255, 255, 0.10);
+  /* Page surfaces */
+  --color-page: #F8F8FA;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F1F1F5;
+  --color-violet-surface: #F0EEFF;
+
+  /* Brand violet */
+  --color-primary: #6657FF;
+  --color-primary-hover: #5546F0;
+  --color-primary-light: #8B80FF;
+
+  /* Text */
+  --color-ink: #15151A;
+  --color-ink-secondary: #696971;
+  --color-ink-muted: #91919A;
+
+  /* Borders */
+  --color-line: #E5E5EA;
+  --color-line-strong: #D8D8DF;
+
+  /* Dark footer */
+  --color-footer: #09090D;
+  --color-footer-surface: #111117;
+  --color-footer-text: #ECECEF;
+  --color-footer-secondary: #8B8B94;
+
+  /* Status */
+  --color-success: #42B883;
+  --color-warning: #E5A53A;
+  --color-error: #D94A4A;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(15, 15, 26, 0.04), 0 1px 2px rgba(15, 15, 26, 0.03);
+  --shadow-float: 0 4px 24px rgba(15, 15, 26, 0.06), 0 1px 4px rgba(15, 15, 26, 0.04);
+  --shadow-lifted: 0 12px 48px rgba(15, 15, 26, 0.08), 0 4px 16px rgba(15, 15, 26, 0.04);
+  --shadow-nav: 0 2px 12px rgba(15, 15, 26, 0.06), 0 1px 3px rgba(15, 15, 26, 0.04);
 }
 
 @layer base {
@@ -31,8 +60,9 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background: #f3f1ec;
-    color: #111116;
+    background: #F8F8FA;
+    color: #15151A;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
   }
 
   * {
@@ -40,14 +70,18 @@
   }
 
   :focus-visible {
-    outline: 2px solid #5c4bff;
+    outline: 2px solid #6657FF;
     outline-offset: 2px;
     border-radius: 4px;
   }
 
   ::selection {
-    background: #e2deff;
-    color: #111116;
+    background: #F0EEFF;
+    color: #15151A;
+  }
+
+  [id] {
+    scroll-margin-top: 88px;
   }
 }
 
@@ -55,19 +89,19 @@
   text-wrap: balance;
 }
 
-@utility anchor {
-  scroll-margin-top: 80px;
+@utility text-pretty {
+  text-wrap: pretty;
 }
 
-@layer utilities {
-  .signal-incoming { color: #5c4bff; }
-  .signal-active { color: #5c4bff; filter: drop-shadow(0 0 8px rgba(92,75,255,0.4)); }
-  .signal-completed { color: #a6f4c5; }
-  .signal-path { stroke: #5c4bff; stroke-width: 1.5; fill: none; stroke-linecap: round; }
-  .signal-dot { fill: #5c4bff; }
-  .signal-dot-active { fill: #5c4bff; filter: drop-shadow(0 0 6px rgba(92,75,255,0.5)); }
-  .signal-dot-completed { fill: #a6f4c5; }
-  .signal-dot-inactive { fill: rgba(255,255,255,0.15); }
+@utility dotted-grid {
+  background-image: radial-gradient(circle, #D8D8DF 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: 0 0;
+}
+
+@utility dotted-grid-sm {
+  background-image: radial-gradient(circle, rgba(216, 216, 223, 0.6) 1px, transparent 1px);
+  background-size: 16px 16px;
 }
 
 @media (prefers-reduced-motion: reduce) {
