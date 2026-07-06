@@ -8,13 +8,13 @@ export default function Benefits() {
   return (
     <section className="bg-page py-16 md:py-20">
       <Container>
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-[16px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map((benefit, i) => {
             const Icon = benefit.icon
             return (
               <motion.div
                 key={benefit.title}
-                className="flex flex-col gap-3 bg-surface p-6 md:p-7"
+                className={`flex flex-col gap-3 px-0 py-6 md:px-6 ${i > 0 ? 'lg:border-l lg:border-line' : ''} ${i % 2 === 1 ? 'sm:border-l sm:border-line' : ''}`}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}

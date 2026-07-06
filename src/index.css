@@ -104,6 +104,33 @@
   background-size: 16px 16px;
 }
 
+@utility orbit-active {
+  position: relative;
+}
+
+@utility orbit-success {
+  position: relative;
+}
+
+@layer utilities {
+  .orbit-active::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 1.5px solid rgba(102, 87, 255, 0.2);
+    pointer-events: none;
+  }
+  .orbit-success::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 1.5px solid rgba(66, 184, 131, 0.2);
+    pointer-events: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

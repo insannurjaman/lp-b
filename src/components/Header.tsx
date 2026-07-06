@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Menu } from 'lucide-react'
 import Base360PlatformMark from './Base360PlatformMark'
 import MobileNavigation from './MobileNavigation'
@@ -6,14 +6,46 @@ import { navItems } from '../data/content'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
+  const lastScrollRef = useRef(0)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 12)
+    const handleScroll = () => {
+      const currentScroll = window.scrollY
+
+      setScrolled(currentScroll > 12)
+
+      // Hide on scroll down, reveal on scroll up (only after hero)
+      if (currentScroll > 200 && !menuOpen) {
+        if (currentScroll > lastScrollRef.current + 8) {
+          setHidden(true)
+        } else if (currentScroll < lastScrollRef.current - 8) {
+          setHidden(false)
+        }
+      } else {
+        setHidden(false)
+      }
+      lastScrollRef.current = currentScroll
+
+      // Active section tracking
+      const sections = ['hero', 'how-it-works', 'platform', 'capabilities', 'customer-history', 'contact']
+      for (const id of sections) {
+        const el = document.getElementById(id)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= 120 && rect.bottom >= 120) {
+            setActiveSection(id)
+            break
+          }
+        }
+      }
+    }
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [menuOpen])
 
   const handleNavClick = (href: string) => (e: React.MouseEvent) => {
     if (href.startsWith('#')) {
@@ -25,47 +57,52 @@ export default function Header() {
 
   return (
     <>
-      <div className="fixed inset-x-0 top-0 z-30 pt-4 px-4 sm:pt-5 sm:px-6 lg:pt-6">
-        <div className="mx-auto max-w-[1240px]">
+      <div
+        className={`fixed inset-x-0 top-0 z-30 transition-transform duration-300 ${hidden ? '-translate-y-full' : 'translate-y-0'}`}
+        style={{ paddingTop: '16px' }}
+      >
+        <div className="mx-auto max-w-[1240px] px-4 sm:px-6">
           <header
             className={`flex items-center justify-between rounded-[14px] border transition-all duration-300 ${
               scrolled
-                ? 'border-line bg-surface/85 shadow-nav backdrop-blur-xl'
+                ? 'border-line bg-surface/90 shadow-nav backdrop-blur-xl'
                 : 'border-line/60 bg-surface/60 backdrop-blur-md'
             }`}
             style={{ minHeight: '60px' }}
           >
-            {/* Left: logo */}
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
               className="flex items-center gap-2.5 pl-4 sm:pl-5"
               aria-label="Base360 home"
             >
-              <Base360PlatformMark size={30} />
-              <span className="font-heading text-[17px] font-semibold tracking-tight text-ink">Base360</span>
+              <Base360PlatformMark size={28} />
+              <span className="font-heading text-[16px] font-semibold tracking-tight text-ink">Base360</span>
             </a>
 
-            {/* Center: nav links (desktop) */}
-            <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={handleNavClick(item.href)}
-                  className="rounded-lg px-3.5 py-2 text-[14px] font-medium text-ink-secondary transition-colors hover:text-ink"
-                >
-                  {item.label}
-                </a>
-              ))}
+            <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main navigation">
+              {navItems.map((item) => {
+                const isActive = activeSection === item.href.slice(1)
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={handleNavClick(item.href)}
+                    className={`rounded-lg px-3.5 py-2 text-[14px] font-medium transition-colors ${
+                      isActive ? 'text-primary' : 'text-ink-secondary hover:text-ink'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                )
+              })}
             </nav>
 
-            {/* Right: CTA + mobile menu */}
             <div className="flex items-center gap-2 pr-2 sm:pr-3">
               <a
                 href="#contact"
                 onClick={handleNavClick('#contact')}
-                className="hidden lg:inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-[14px] font-medium text-white transition-colors hover:bg-primary-hover"
+                className="hidden lg:inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-[14px] font-medium text-white shadow-card transition-colors hover:bg-primary-hover"
               >
                 Request early access
               </a>

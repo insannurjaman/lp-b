@@ -93,22 +93,22 @@ function FooterPlatformIllustration() {
         </defs>
         <rect width="192" height="128" fill="url(#footer-grid)" />
 
-        {/* Stacked surfaces */}
-        <rect x="32" y="72" width="128" height="40" rx="8" fill="#111117" stroke="rgba(255,255,255,0.06)" />
-        <rect x="44" y="56" width="104" height="32" rx="6" fill="#16161E" stroke="rgba(255,255,255,0.08)" />
-        <rect x="56" y="40" width="80" height="24" rx="5" fill="#1C1C26" stroke="rgba(255,255,255,0.10)" />
+        {/* Stacked surfaces — orbit layers */}
+        <rect x="24" y="76" width="144" height="36" rx="8" fill="#111117" stroke="rgba(255,255,255,0.06)" />
+        <rect x="40" y="56" width="112" height="28" rx="6" fill="#16161E" stroke="rgba(255,255,255,0.08)" />
+        <rect x="56" y="36" width="80" height="22" rx="5" fill="#1C1C26" stroke="rgba(255,255,255,0.10)" />
 
-        {/* Violet signal line */}
-        <path d="M 16 96 Q 48 96 48 64 L 48 52 Q 48 40 96 40 Q 144 40 144 52 L 144 64 Q 144 96 176 96" stroke="#6657FF" strokeWidth="1.5" fill="none" strokeDasharray="3 4" />
+        {/* Orbit path — semicircle through layers */}
+        <path d="M 12 96 Q 96 8 180 96" stroke="#6657FF" strokeWidth="1.5" fill="none" strokeDasharray="3 4" strokeOpacity="0.5" />
 
-        {/* Signal dots */}
-        <circle cx="16" cy="96" r="3" fill="#6657FF" />
-        <circle cx="96" cy="40" r="3" fill="#6657FF" />
-        <circle cx="176" cy="96" r="3" fill="#6657FF" />
+        {/* Orbit nodes */}
+        <circle cx="12" cy="96" r="3" fill="#6657FF" />
+        <circle cx="96" cy="22" r="4" fill="#6657FF" fillOpacity="0.2" />
+        <circle cx="96" cy="22" r="2.5" fill="#6657FF" />
+        <circle cx="180" cy="96" r="3" fill="#42B883" />
 
-        {/* Core mark */}
-        <circle cx="96" cy="40" r="6" fill="#6657FF" fillOpacity="0.15" />
-        <circle cx="96" cy="40" r="3" fill="#6657FF" />
+        {/* Connecting signal */}
+        <path d="M 12 96 L 96 22 L 180 96" stroke="#6657FF" strokeWidth="0.75" fill="none" strokeOpacity="0.3" />
       </svg>
     </div>
   )

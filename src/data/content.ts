@@ -19,22 +19,43 @@ export const navItems: NavItem[] = [
   { label: 'Contact', href: '#contact' },
 ]
 
-/* ───────────────── Hero journey illustration ───────────────── */
+/* ───────────────── Hero journey ───────────────── */
 
-export interface WorkflowNodeData {
+export interface HeroJourneyStep {
+  step: number
+  label: string
+  customerAction: string
+  base360Action: string
+  recordUpdate: string
+}
+
+export const heroJourneySteps: HeroJourneyStep[] = [
+  { step: 1, label: 'Comment received', customerAction: 'How much is this?', base360Action: 'Incoming signal detected', recordUpdate: 'New conversation · TikTok' },
+  { step: 2, label: 'Public reply', customerAction: 'Awaiting response', base360Action: 'Reply generated · sent in-thread', recordUpdate: 'Status: Responded' },
+  { step: 3, label: 'Private DM', customerAction: 'Continued in DM', base360Action: 'DM thread opened · context carried', recordUpdate: 'Channel: TikTok → Instagram' },
+  { step: 4, label: 'Questions answered', customerAction: 'Interested in Pro plan', base360Action: 'Product info sent · summary created', recordUpdate: 'Interest: Pro plan' },
+  { step: 5, label: 'Qualified', customerAction: 'High buying intent', base360Action: 'Intent analysis complete · score 92', recordUpdate: 'Intent: Unknown → High' },
+  { step: 6, label: 'CRM record created', customerAction: 'Lead record active', base360Action: 'Contact created · full history attached', recordUpdate: 'Lead stage: New → Qualified' },
+  { step: 7, label: 'AI call', customerAction: 'Demo confirmed', base360Action: 'Voice call completed · tomorrow 2pm', recordUpdate: 'Next action: Schedule demo' },
+  { step: 8, label: 'Nurture campaign', customerAction: 'Campaign active', base360Action: 'Added to Summer Launch sequence', recordUpdate: 'Campaign: activated' },
+  { step: 9, label: 'Customer won', customerAction: 'Signed up', base360Action: 'Opportunity closed · revenue booked', recordUpdate: 'Lead stage: Customer · Won' },
+]
+
+export interface HeroOrbitNode {
   id: string
   label: string
   icon: ComponentType<LucideProps>
   side: 'left' | 'right'
 }
 
-export const heroWorkflowNodes: WorkflowNodeData[] = [
-  { id: 'reply', label: 'AI reply', icon: Send, side: 'left' },
+export const heroOrbitNodes: HeroOrbitNode[] = [
+  { id: 'reply', label: 'Public reply', icon: Send, side: 'left' },
   { id: 'dm', label: 'Private DM', icon: MessageCircle, side: 'left' },
-  { id: 'qualify', label: 'Qualify', icon: Zap, side: 'left' },
-  { id: 'crm', label: 'CRM lead', icon: User, side: 'right' },
+  { id: 'answers', label: 'Questions answered', icon: MessageCircle, side: 'left' },
+  { id: 'qualify', label: 'Intent qualified', icon: Zap, side: 'left' },
+  { id: 'crm', label: 'CRM created', icon: User, side: 'right' },
   { id: 'call', label: 'AI call', icon: PhoneCall, side: 'right' },
-  { id: 'campaign', label: 'Campaign', icon: Mail, side: 'right' },
+  { id: 'campaign', label: 'Campaign activated', icon: Mail, side: 'right' },
 ]
 
 /* ───────────────── Product proof journey ───────────────── */
@@ -62,6 +83,28 @@ export const proofBenefits = [
   'One customer history',
   'Automatic qualification',
   'Continuous follow-up',
+]
+
+/* ───────────────── Customer history ───────────────── */
+
+export interface HistoryEvent {
+  id: string
+  channel: string
+  action: string
+  detail: string
+  time: string
+  icon: ComponentType<LucideProps>
+}
+
+export const customerHistoryEvents: HistoryEvent[] = [
+  { id: 'h1', channel: 'TikTok', action: 'Comment received', detail: '"How much is this?"', time: '0m', icon: MessageCircle },
+  { id: 'h2', channel: 'TikTok', action: 'Public reply sent', detail: 'Pricing shared in-thread', time: '1m', icon: Send },
+  { id: 'h3', channel: 'Instagram', action: 'DM conversation opened', detail: 'Context carried from comment', time: '3m', icon: MessageCircle },
+  { id: 'h4', channel: 'System', action: 'Buying intent qualified', detail: 'Interest: Pro plan · Score: 92', time: '5m', icon: Zap },
+  { id: 'h5', channel: 'CRM', action: 'Customer record created', detail: 'Full history attached · Lead: Qualified', time: '6m', icon: User },
+  { id: 'h6', channel: 'Phone', action: 'AI voice call completed', detail: 'Demo confirmed for Thursday', time: '12m', icon: PhoneCall },
+  { id: 'h7', channel: 'Email', action: 'Campaign message sent', detail: 'Welcome sequence · Summer Launch', time: '1h', icon: Mail },
+  { id: 'h8', channel: 'System', action: 'Customer converted', detail: 'Opportunity closed · Won', time: '2d', icon: CheckCircle2 },
 ]
 
 /* ───────────────── Workspace ───────────────── */
@@ -119,6 +162,12 @@ export const activityEvents: ActivityEvent[] = [
 
 export const workspaceNav = ['Inbox', 'Contacts', 'Opportunities', 'AI agents', 'Campaigns']
 
+export const workspaceAnnotations = [
+  'Every channel in one inbox',
+  'AI understands and acts',
+  'Complete customer context',
+]
+
 /* ───────────────── Benefits ───────────────── */
 
 export interface Benefit {
@@ -134,23 +183,91 @@ export const benefits: Benefit[] = [
   { icon: TrendingUp, title: 'Move leads forward', description: 'Automated next actions prevent opportunities from becoming inactive.' },
 ]
 
-/* ───────────────── Automation journey ───────────────── */
+/* ───────────────── Capabilities ───────────────── */
 
-export interface AutomationStage {
-  id: string
+export interface CapabilityChannel {
+  name: string
+  icon: ComponentType<LucideProps>
+}
+
+export const capabilityChannels: CapabilityChannel[] = [
+  { name: 'TikTok', icon: MessageCircle },
+  { name: 'Instagram', icon: MessageCircle },
+  { name: 'WhatsApp', icon: MessageCircle },
+  { name: 'SMS', icon: MessageCircle },
+  { name: 'Email', icon: Mail },
+  { name: 'Voice', icon: PhoneCall },
+]
+
+export interface CapabilityInboxItem {
+  person: string
+  preview: string
+  channel: string
+  time: string
+  unread: boolean
+  priority?: 'high' | 'normal'
+}
+
+export const capabilityInboxItems: CapabilityInboxItem[] = [
+  { person: 'Alex Chen', preview: 'How much is this?', channel: 'TikTok', time: '2m', unread: true, priority: 'high' },
+  { person: 'Sam Rivera', preview: 'Is this still available?', channel: 'IG', time: '8m', unread: true },
+  { person: 'Jordan Lee', preview: 'Thanks for the info!', channel: 'WA', time: '23m', unread: false },
+  { person: 'Priya Sharma', preview: 'Looking forward to the demo', channel: 'Email', time: '1h', unread: false },
+]
+
+export interface AgentAction {
+  label: string
+  done: boolean
+  icon: ComponentType<LucideProps>
+}
+
+export const agentActions: AgentAction[] = [
+  { label: 'Reply generated', done: true, icon: Send },
+  { label: 'Intent qualified — High', done: true, icon: Zap },
+  { label: 'CRM contact created', done: true, icon: User },
+  { label: 'AI call scheduled', done: true, icon: PhoneCall },
+  { label: 'Campaign activated', done: false, icon: Mail },
+  { label: 'Human handoff ready', done: false, icon: Users },
+]
+
+export interface AgentInput {
   label: string
   icon: ComponentType<LucideProps>
 }
 
-export const automationStages: AutomationStage[] = [
-  { id: 'comment', label: 'Comment', icon: MessageCircle },
-  { id: 'reply', label: 'Reply', icon: Send },
-  { id: 'dm', label: 'DM', icon: MessageCircle },
-  { id: 'qualify', label: 'Qualify', icon: Zap },
-  { id: 'crm', label: 'CRM', icon: User },
-  { id: 'call', label: 'Call', icon: PhoneCall },
-  { id: 'campaign', label: 'Campaign', icon: Mail },
-  { id: 'customer', label: 'Customer', icon: CheckCircle2 },
+export const agentInputs: AgentInput[] = [
+  { label: 'TikTok comment', icon: MessageCircle },
+  { label: 'Instagram DM', icon: MessageCircle },
+  { label: 'WhatsApp message', icon: MessageCircle },
+]
+
+export interface FollowUpStep {
+  label: string
+  status: 'done' | 'active' | 'pending'
+  time: string
+}
+
+export const followUpSteps: FollowUpStep[] = [
+  { label: 'Comment reply', status: 'done', time: '0.3s' },
+  { label: 'DM follow-up', status: 'done', time: '1.1s' },
+  { label: 'Qualification', status: 'done', time: '2.4s' },
+  { label: 'AI voice call', status: 'active', time: 'now' },
+  { label: 'Email nurture', status: 'pending', time: 'tomorrow' },
+  { label: 'Demo scheduled', status: 'pending', time: 'Thu' },
+]
+
+export interface CampaignStep {
+  name: string
+  status: 'sent' | 'ready' | 'scheduled'
+  channel: string
+}
+
+export const campaignSteps: CampaignStep[] = [
+  { name: 'Welcome', status: 'sent', channel: 'Email' },
+  { name: 'Features', status: 'sent', channel: 'SMS' },
+  { name: 'Case study', status: 'ready', channel: 'Email' },
+  { name: 'Demo invite', status: 'scheduled', channel: 'Voice' },
+  { name: 'Follow-up', status: 'scheduled', channel: 'Email' },
 ]
 
 /* ───────────────── Footer ───────────────── */
