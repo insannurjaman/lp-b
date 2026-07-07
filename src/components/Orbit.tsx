@@ -34,9 +34,17 @@ interface OrbitCoreProps {
   complete?: boolean
   label?: string
   showPulse?: boolean
+  showSignalDots?: boolean
 }
 
-export function OrbitCore({ size = 72, active = false, complete = false, label, showPulse = true }: OrbitCoreProps) {
+export function OrbitCore({
+  size = 72,
+  active = false,
+  complete = false,
+  label,
+  showPulse = true,
+  showSignalDots = true,
+}: OrbitCoreProps) {
   return (
     <div className="relative flex flex-col items-center">
       <div className="relative" style={{ width: size, height: size }}>
@@ -45,48 +53,92 @@ export function OrbitCore({ size = 72, active = false, complete = false, label, 
           <>
             <motion.div
               className="absolute inset-0 rounded-full"
-              style={{ border: '2px solid rgba(102, 87, 255, 0.2)' }}
-              animate={{ scale: [1, 1.35], opacity: [0.6, 0] }}
+              style={{ border: '2px solid rgba(102, 87, 255, 0.25)' }}
+              animate={{ scale: [1, 1.4], opacity: [0.7, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
             />
             <motion.div
               className="absolute inset-0 rounded-full"
               style={{ border: '2px solid rgba(102, 87, 255, 0.15)' }}
-              animate={{ scale: [1, 1.6], opacity: [0.4, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay: 0.6 }}
+              animate={{ scale: [1, 1.7], opacity: [0.5, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay: 0.7 }}
             />
           </>
         )}
 
-        {/* Core circle */}
+        {/* Success glow when complete */}
+        {complete && showPulse && (
+          <motion.div
+            className="absolute inset-0 rounded-full"
+            style={{ border: '2px solid rgba(66, 184, 131, 0.2)' }}
+            animate={{ scale: [1, 1.3], opacity: [0.6, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeOut' }}
+          />
+        )}
+
+        {/* Outer ring — platform surface */}
         <div
-          className={`relative flex items-center justify-center rounded-full border-2 transition-colors duration-500 ${
+          className={`absolute rounded-full border-2 transition-colors duration-500 ${
             complete
-              ? 'border-success/40 bg-success/5'
+              ? 'border-success/30 bg-success/5'
               : active
-              ? 'border-primary/40 bg-violet-surface'
+              ? 'border-primary/30 bg-violet-surface/50'
               : 'border-line bg-surface'
           }`}
           style={{ width: size, height: size }}
         >
-          {/* Inner ring */}
+          {/* Inner ring — processing layer */}
           <div
             className={`absolute rounded-full border transition-colors duration-500 ${
-              complete ? 'border-success/20' : active ? 'border-primary/20' : 'border-line/50'
+              complete ? 'border-success/20' : active ? 'border-primary/20' : 'border-line/60'
             }`}
-            style={{ inset: size * 0.18 }}
-          />
-          {/* Center mark */}
-          <svg viewBox="0 0 32 32" fill="none" style={{ width: size * 0.5, height: size * 0.5 }} aria-hidden="true">
-            <rect x="1" y="1" width="30" height="30" rx="9" fill={complete ? '#42B883' : '#6657FF'} />
-            <circle cx="16" cy="16" r="8.5" stroke="white" strokeOpacity="0.9" strokeWidth="2" />
-            <circle cx="16" cy="7.5" r="2.6" fill="white" />
-          </svg>
+            style={{ inset: size * 0.14 }}
+          >
+            {/* Center mark container */}
+            <div
+              className="absolute flex items-center justify-center rounded-full transition-colors duration-500"
+              style={{
+                inset: size * 0.16,
+                background: complete ? '#42B883' : active ? '#6657FF' : '#91919A',
+              }}
+            >
+              <svg
+                viewBox="0 0 32 32"
+                fill="none"
+                style={{ width: size * 0.34, height: size * 0.34 }}
+                aria-hidden="true"
+              >
+                <circle cx="16" cy="16" r="9" stroke="white" strokeOpacity="0.95" strokeWidth="2.2" />
+                <circle cx="16" cy="6.5" r="2.8" fill="white" />
+                <circle cx="25.5" cy="16" r="1.6" fill="white" fillOpacity="0.8" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Signal connection dots — input (left) and output (right) */}
+          {showSignalDots && (
+            <>
+              <div
+                className={`absolute top-1/2 -translate-y-1/2 rounded-full border-2 transition-colors duration-500 ${
+                  active ? 'border-primary bg-violet-surface' : complete ? 'border-success bg-success/10' : 'border-line bg-surface'
+                }`}
+                style={{ width: size * 0.16, height: size * 0.16, left: -(size * 0.08) }}
+                aria-hidden="true"
+              />
+              <div
+                className={`absolute top-1/2 -translate-y-1/2 rounded-full border-2 transition-colors duration-500 ${
+                  complete ? 'border-success bg-success/10' : active ? 'border-primary bg-violet-surface' : 'border-line bg-surface'
+                }`}
+                style={{ width: size * 0.16, height: size * 0.16, right: -(size * 0.08) }}
+                aria-hidden="true"
+              />
+            </>
+          )}
         </div>
       </div>
       {label && (
-        <p className={`mt-2.5 text-[12px] font-medium transition-colors duration-500 ${
-          complete ? 'text-success' : active ? 'text-primary' : 'text-ink-muted'
+        <p className={`mt-3 text-[13px] font-medium transition-colors duration-500 ${
+          complete ? 'text-success' : active ? 'text-primary' : 'text-ink-secondary'
         }`}>
           {label}
         </p>
@@ -137,8 +189,8 @@ export function OrbitPulse({ active, variant = 'horizontal', duration = 2 }: Orb
   if (variant === 'vertical') {
     return (
       <motion.div
-        className="absolute left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-primary"
-        style={{ boxShadow: '0 0 8px rgba(102,87,255,0.4)' }}
+        className="absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary"
+        style={{ boxShadow: '0 0 10px rgba(102,87,255,0.5)' }}
         animate={{ top: ['0%', '100%', '0%'] }}
         transition={{ duration, repeat: Infinity, ease: 'easeInOut' }}
       />
@@ -147,8 +199,8 @@ export function OrbitPulse({ active, variant = 'horizontal', duration = 2 }: Orb
 
   return (
     <motion.div
-      className="absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-primary"
-      style={{ boxShadow: '0 0 8px rgba(102,87,255,0.4)' }}
+      className="absolute top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-primary"
+      style={{ boxShadow: '0 0 10px rgba(102,87,255,0.5)' }}
       animate={{ left: ['0%', '100%', '0%'] }}
       transition={{ duration, repeat: Infinity, ease: 'easeInOut' }}
     />
@@ -221,40 +273,59 @@ interface OrbitSuccessProps {
   initials: string
   score?: string
   campaign?: string
+  source?: string
+  intent?: string
+  leadStage?: string
 }
 
-export function OrbitSuccess({ person, initials, score, campaign }: OrbitSuccessProps) {
+export function OrbitSuccess({ person, initials, score, campaign, source, intent, leadStage }: OrbitSuccessProps) {
   return (
-    <div className="relative rounded-xl border border-success/30 bg-success/5 p-4 shadow-float">
-      <div className="mb-3 flex items-center gap-2.5">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success/15">
-          <span className="text-[13px] font-semibold text-success">{initials}</span>
+    <div className="relative rounded-xl border border-success/30 bg-success/5 p-5 shadow-float">
+      <div className="mb-4 flex items-center gap-2.5">
+        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-success/15">
+          <span className="text-[14px] font-semibold text-success">{initials}</span>
         </div>
         <div>
-          <p className="text-[14px] font-semibold text-ink">{person}</p>
-          <span className="text-[12px] text-ink-muted">Customer</span>
+          <p className="text-[15px] font-semibold text-ink">{person}</p>
+          <span className="text-[13px] text-ink-secondary">Customer</span>
         </div>
-        <span className="ml-auto rounded-md bg-success/15 px-2 py-0.5 text-[12px] font-medium text-success">Won</span>
+        <span className="ml-auto rounded-md bg-success/15 px-2.5 py-1 text-[12px] font-semibold text-success">Won</span>
       </div>
-      {(score || campaign) && (
-        <div className="grid grid-cols-2 gap-x-3 gap-y-2">
-          {score && (
-            <div>
-              <span className="text-[11px] text-ink-muted">Lead score</span>
-              <p className="text-[13px] font-semibold text-primary">{score}</p>
-            </div>
-          )}
-          {campaign && (
-            <div>
-              <span className="text-[11px] text-ink-muted">Campaign</span>
-              <p className="text-[13px] font-medium text-ink">{campaign}</p>
-            </div>
-          )}
-        </div>
-      )}
-      <div className="mt-3 flex items-center gap-1.5 border-t border-success/20 pt-2.5">
-        <CheckCircle2 className="h-3.5 w-3.5 text-success" />
-        <span className="text-[12px] font-medium text-success">Customer created</span>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+        {source && (
+          <div>
+            <span className="text-[12px] text-ink-muted">Source</span>
+            <p className="text-[14px] font-medium text-ink">{source}</p>
+          </div>
+        )}
+        {intent && (
+          <div>
+            <span className="text-[12px] text-ink-muted">Intent</span>
+            <p className="text-[14px] font-semibold text-success">{intent}</p>
+          </div>
+        )}
+        {leadStage && (
+          <div>
+            <span className="text-[12px] text-ink-muted">Lead stage</span>
+            <p className="text-[14px] font-semibold text-primary">{leadStage}</p>
+          </div>
+        )}
+        {score && (
+          <div>
+            <span className="text-[12px] text-ink-muted">Lead score</span>
+            <p className="text-[14px] font-semibold text-primary">{score}</p>
+          </div>
+        )}
+        {campaign && (
+          <div className="col-span-2">
+            <span className="text-[12px] text-ink-muted">Campaign</span>
+            <p className="text-[14px] font-medium text-ink">{campaign}</p>
+          </div>
+        )}
+      </div>
+      <div className="mt-4 flex items-center gap-2 border-t border-success/20 pt-3">
+        <CheckCircle2 className="h-4 w-4 text-success" />
+        <span className="text-[13px] font-medium text-success">Customer created</span>
       </div>
     </div>
   )

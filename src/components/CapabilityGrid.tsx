@@ -59,23 +59,23 @@ export default function CapabilityGrid() {
             {/* Conversation list — denser, horizontal */}
             <div className="mt-4 space-y-1">
               {capabilityInboxItems.map((item) => (
-                <div key={item.person} className={`flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors ${
-                  item.unread ? 'bg-violet-surface/50' : 'opacity-60'
+                <div key={item.person} className={`flex items-center gap-3 rounded-lg border px-3 py-2.5 transition-colors ${
+                  item.unread ? 'border-primary/20 bg-violet-surface/60' : 'border-transparent opacity-80'
                 }`}>
-                  <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md ${item.unread ? 'bg-violet-surface text-primary' : 'bg-surface-2 text-ink-muted'}`}>
+                  <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md ${item.unread ? 'bg-violet-surface text-primary' : 'bg-surface-2 text-ink-secondary'}`}>
                     <MessageCircle className="h-3.5 w-3.5" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
-                      <span className={`truncate text-[13px] ${item.unread ? 'font-semibold text-ink' : 'font-medium text-ink-secondary'}`}>{item.person}</span>
+                      <span className={`truncate text-[14px] ${item.unread ? 'font-semibold text-ink' : 'font-medium text-ink-secondary'}`}>{item.person}</span>
                       {item.unread && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />}
                       {item.priority === 'high' && (
-                        <span className="rounded bg-primary/10 px-1 py-0.5 text-[9px] font-semibold text-primary">HIGH</span>
+                        <span className="rounded bg-primary/10 px-1 py-0.5 text-[11px] font-semibold text-primary">HIGH</span>
                       )}
                     </div>
-                    <p className="truncate text-[12px] text-ink-muted">{item.preview}</p>
+                    <p className="truncate text-[13px] text-ink-muted">{item.preview}</p>
                   </div>
-                  <span className="shrink-0 text-[12px] text-ink-muted">{item.channel} · {item.time}</span>
+                  <span className="shrink-0 text-[13px] text-ink-muted">{item.channel} - {item.time}</span>
                 </div>
               ))}
             </div>
@@ -93,36 +93,41 @@ export default function CapabilityGrid() {
               <div className="flex items-center gap-2.5">
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-violet-surface text-[14px] font-semibold text-primary">AC</div>
                 <div className="flex-1">
-                  <p className="text-[14px] font-semibold text-ink">Alex Chen</p>
-                  <p className="text-[12px] text-ink-muted">Lead · Created 15m ago</p>
+                  <p className="text-[15px] font-semibold text-ink">Alex Chen</p>
+                  <p className="text-[13px] text-ink-muted">Lead - Created 15m ago</p>
                 </div>
-                <span className="rounded-md bg-violet-surface px-2 py-0.5 text-[12px] font-semibold text-primary">Score 92</span>
+                <span className="rounded-md bg-violet-surface px-2.5 py-1 text-[12px] font-semibold text-primary">Score 92</span>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3">
                 <div>
-                  <span className="text-[12px] text-ink-muted">Intent</span>
-                  <p className="text-[13px] font-semibold text-success">High</p>
+                  <span className="text-[13px] text-ink-muted">Intent</span>
+                  <p className="text-[14px] font-semibold text-success">High</p>
                 </div>
                 <div>
-                  <span className="text-[12px] text-ink-muted">Lead stage</span>
-                  <p className="text-[13px] font-semibold text-primary">Qualified</p>
+                  <span className="text-[13px] text-ink-muted">Lead stage</span>
+                  <p className="text-[14px] font-semibold text-primary">Qualified</p>
                 </div>
                 <div>
-                  <span className="text-[12px] text-ink-muted">Owner</span>
-                  <p className="text-[13px] font-medium text-ink">AI Agent</p>
+                  <span className="text-[13px] text-ink-muted">Owner</span>
+                  <p className="text-[14px] font-medium text-ink">AI Agent</p>
                 </div>
                 <div>
-                  <span className="text-[12px] text-ink-muted">Source</span>
-                  <p className="text-[13px] font-medium text-ink">TikTok</p>
+                  <span className="text-[13px] text-ink-muted">Source</span>
+                  <p className="text-[14px] font-medium text-ink">TikTok</p>
                 </div>
                 <div>
-                  <span className="text-[12px] text-ink-muted">Campaign</span>
-                  <p className="text-[13px] font-medium text-primary">Summer 2026</p>
+                  <span className="text-[13px] text-ink-muted">Campaign</span>
+                  <p className="text-[14px] font-medium text-primary">Summer 2026</p>
                 </div>
                 <div>
-                  <span className="text-[12px] text-ink-muted">Next action</span>
-                  <p className="text-[13px] font-medium text-ink">Schedule demo</p>
+                  <span className="text-[13px] text-ink-muted">Next action</span>
+                  <p className="text-[14px] font-medium text-ink">Schedule demo</p>
                 </div>
+              </div>
+              {/* Next action callout */}
+              <div className="mt-4 flex items-center gap-2 rounded-lg border border-primary/20 bg-violet-surface/40 px-3 py-2">
+                <ArrowRight className="h-3.5 w-3.5 text-primary" />
+                <span className="text-[13px] font-medium text-primary">High intent - schedule demo call</span>
               </div>
             </div>
           </motion.div>
@@ -144,13 +149,15 @@ export default function CapabilityGrid() {
 
                 {/* Left: Inputs */}
                 <div className="space-y-2">
-                  <p className="mb-3 text-[12px] font-semibold uppercase tracking-wider text-ink-muted">Channel inputs</p>
+                  <p className="mb-3 text-[13px] font-semibold uppercase tracking-wider text-ink-muted">Channel inputs</p>
                   {agentInputs.map((input) => {
                     const Icon = input.icon
                     return (
-                      <div key={input.label} className="flex items-center gap-2.5 rounded-lg border border-line bg-surface-2/40 px-3.5 py-2.5">
-                        <Icon className="h-4 w-4 text-ink-muted" />
-                        <span className="text-[13px] font-medium text-ink-secondary">{input.label}</span>
+                      <div key={input.label} className="flex items-center gap-3 rounded-lg border border-line bg-surface px-3.5 py-3 shadow-card">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-violet-surface">
+                          <Icon className="h-4 w-4 text-primary" />
+                        </div>
+                        <span className="text-[14px] font-medium text-ink">{input.label}</span>
                       </div>
                     )
                   })}
@@ -164,19 +171,19 @@ export default function CapabilityGrid() {
                     <OrbitPulse active={!reduceMotion} variant="horizontal" duration={3} />
                   </div>
 
-                  <OrbitCore size={96} active={!reduceMotion} complete={false} label="Base360 core" showPulse={!reduceMotion} />
+                  <OrbitCore size={112} active={!reduceMotion} complete={false} label="Base360 core" showPulse={!reduceMotion} />
 
                   {/* Surrounding AI task chips */}
-                  <div className="mt-6 grid w-full max-w-[400px] grid-cols-3 gap-2">
+                  <div className="mt-6 grid w-full max-w-[400px] grid-cols-2 gap-2">
                     {agentActions.map((action) => {
                       const Icon = action.icon
                       return (
-                        <div key={action.label} className={`flex items-center gap-1.5 rounded-lg border px-2 py-1.5 transition-colors ${
-                          action.done ? 'border-success/20 bg-success/5' : 'border-line bg-surface-2/30 opacity-60'
+                        <div key={action.label} className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 transition-colors ${
+                          action.done ? 'border-success/25 bg-success/5' : 'border-line bg-surface-2/30 opacity-70'
                         }`}>
-                          <Icon className={`h-3 w-3 ${action.done ? 'text-success' : 'text-ink-muted'}`} />
+                          <Icon className={`h-3.5 w-3.5 ${action.done ? 'text-success' : 'text-ink-muted'}`} />
                           <span className={`text-[12px] font-medium ${action.done ? 'text-ink' : 'text-ink-secondary'}`}>{action.label}</span>
-                          {action.done && <CheckCircle2 className="ml-auto h-2.5 w-2.5 text-success" />}
+                          {action.done && <CheckCircle2 className="ml-auto h-3 w-3 text-success" />}
                         </div>
                       )
                     })}
@@ -185,21 +192,22 @@ export default function CapabilityGrid() {
 
                 {/* Right: Outcomes */}
                 <div className="space-y-2">
-                  <p className="mb-3 text-[12px] font-semibold uppercase tracking-wider text-ink-muted">Completed outcomes</p>
+                  <p className="mb-3 text-[13px] font-semibold uppercase tracking-wider text-ink-muted">Completed outcomes</p>
                   {agentActions.filter(a => a.done).map((action) => {
                     const Icon = action.icon
                     return (
-                      <div key={action.label} className="flex items-center gap-2.5 rounded-lg border border-success/20 bg-success/5 px-3.5 py-2.5">
+                      <div key={action.label} className="flex items-center gap-2.5 rounded-lg border border-success/20 bg-success/5 px-3.5 py-3 shadow-card">
                         <Icon className="h-4 w-4 text-success" />
-                        <span className="text-[13px] font-medium text-ink">{action.label}</span>
+                        <span className="text-[14px] font-medium text-ink">{action.label}</span>
                         <CheckCircle2 className="ml-auto h-3.5 w-3.5 text-success" />
                       </div>
                     )
                   })}
-                  {/* Human handoff option */}
-                  <div className="flex items-center gap-2.5 rounded-lg border border-line bg-surface-2/30 px-3.5 py-2.5 opacity-70">
-                    <ArrowRight className="h-4 w-4 text-ink-muted" />
-                    <span className="text-[13px] font-medium text-ink-secondary">Human handoff ready</span>
+                  {/* Human handoff — controlled escalation */}
+                  <div className="flex items-center gap-2.5 rounded-lg border border-primary/20 bg-violet-surface/30 px-3.5 py-3">
+                    <ArrowRight className="h-4 w-4 text-primary" />
+                    <span className="text-[14px] font-medium text-primary">Human handoff ready</span>
+                    <span className="ml-auto rounded-md bg-primary/10 px-2 py-0.5 text-[12px] font-medium text-primary">Escalate</span>
                   </div>
                 </div>
               </div>
@@ -221,7 +229,7 @@ export default function CapabilityGrid() {
                 <div key={step.label} className={`flex items-center gap-3 rounded-lg border px-3.5 py-2.5 transition-colors ${
                   step.status === 'done' ? 'border-success/20 bg-success/5' :
                   step.status === 'active' ? 'border-primary/20 bg-violet-surface' :
-                  'border-line bg-surface-2/30 opacity-60'
+                  'border-line bg-surface-2/30 opacity-70'
                 }`}>
                   <div className={`h-2.5 w-2.5 shrink-0 rounded-full ${
                     step.status === 'done' ? 'bg-success' :
@@ -271,7 +279,7 @@ export default function CapabilityGrid() {
                       </div>
                       <span className={`mt-2 text-[12px] font-medium ${step.status === 'scheduled' ? 'text-ink-muted' : 'text-ink'}`}>{step.name}</span>
                       <span className="text-[12px] text-ink-muted">{step.channel}</span>
-                      <span className={`text-[11px] font-medium ${
+                      <span className={`text-[12px] font-medium ${
                         step.status === 'sent' ? 'text-success' :
                         step.status === 'ready' ? 'text-primary' : 'text-ink-muted'
                       }`}>{step.status}</span>

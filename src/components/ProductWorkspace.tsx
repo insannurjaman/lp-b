@@ -125,18 +125,18 @@ function WorkspaceFrame() {
               {conversations.map((c) => {
                 const Icon = c.icon
                 return (
-                  <div key={c.id} className={`flex items-center gap-2.5 px-3.5 py-3 transition-colors hover:bg-surface-2/40 ${c.unread ? 'bg-violet-surface/30' : 'opacity-70'}`}>
-                    <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md ${c.unread ? 'bg-violet-surface text-primary' : 'bg-surface-2 text-ink-muted'}`}>
+                  <div key={c.id} className={`flex items-center gap-2.5 px-3.5 py-3 transition-colors hover:bg-surface-2/40 ${c.unread ? 'bg-violet-surface/30' : 'opacity-80'}`}>
+                    <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md ${c.unread ? 'bg-violet-surface text-primary' : 'bg-surface-2 text-ink-secondary'}`}>
                       <Icon className="h-4 w-4" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-1.5">
-                        <span className={`truncate text-[13px] ${c.unread ? 'font-semibold text-ink' : 'font-medium text-ink-secondary'}`}>{c.person}</span>
+                        <span className={`truncate text-[14px] ${c.unread ? 'font-semibold text-ink' : 'font-medium text-ink-secondary'}`}>{c.person}</span>
                         {c.unread && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />}
                       </div>
-                      <p className="truncate text-[12px] text-ink-muted">{c.preview}</p>
+                      <p className="truncate text-[13px] text-ink-muted">{c.preview}</p>
                     </div>
-                    <span className="shrink-0 text-[12px] text-ink-muted">{c.time}</span>
+                    <span className="shrink-0 text-[13px] text-ink-muted">{c.time}</span>
                   </div>
                 )
               })}
@@ -145,53 +145,53 @@ function WorkspaceFrame() {
 
           <div className="flex-1 border-b border-line lg:border-b-0">
             <div className="flex items-center gap-2.5 border-b border-line px-4 py-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-violet-surface text-[12px] font-semibold text-primary">AC</div>
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-violet-surface text-[13px] font-semibold text-primary">AC</div>
               <div className="min-w-0 flex-1">
-                <p className="text-[14px] font-semibold text-ink">Alex Chen</p>
+                <p className="text-[15px] font-semibold text-ink">Alex Chen</p>
                 <div className="flex items-center gap-1.5">
-                  <MessageCircle className="h-3 w-3 text-ink-muted" />
-                  <span className="text-[12px] text-ink-muted">TikTok → Instagram DM</span>
+                  <MessageCircle className="h-3.5 w-3.5 text-ink-muted" />
+                  <span className="text-[13px] text-ink-muted">TikTok to Instagram DM</span>
                 </div>
               </div>
-              <span className="rounded-md bg-violet-surface px-2 py-0.5 text-[12px] font-medium text-primary">High intent</span>
+              <span className="rounded-md bg-violet-surface px-2.5 py-1 text-[12px] font-medium text-primary">High intent</span>
             </div>
 
             <div className="space-y-3 p-4">
               <div className="max-w-[88%]">
                 <div className="rounded-xl rounded-bl-sm bg-surface-2 px-3.5 py-2.5">
-                  <p className="text-[14px] text-ink">How much is this?</p>
+                  <p className="text-[15px] text-ink">How much is this?</p>
                 </div>
-                <p className="mt-1 text-[12px] text-ink-muted">Alex · TikTok · 2m ago</p>
+                <p className="mt-1 text-[13px] text-ink-muted">Alex - TikTok - 2m ago</p>
               </div>
 
               <div className="ml-auto max-w-[88%]">
                 <div className="rounded-xl rounded-br-sm bg-violet-surface px-3.5 py-2.5">
-                  <p className="text-[14px] text-ink">Hi Alex! I&apos;ve sent the pricing details to your DMs. Let me know which option looks best.</p>
+                  <p className="text-[15px] text-ink">Hi Alex! I&apos;ve sent the pricing details to your DMs. Let me know which option looks best.</p>
                 </div>
-                <p className="mt-1 text-right text-[12px] text-ink-muted">Base360 AI · 1m ago</p>
+                <p className="mt-1 text-right text-[13px] text-ink-muted">Base360 AI - 1m ago</p>
               </div>
 
               <div className="max-w-[88%]">
                 <div className="rounded-xl rounded-bl-sm bg-surface-2 px-3.5 py-2.5">
-                  <p className="text-[14px] text-ink">The pro plan looks good. Is it available?</p>
+                  <p className="text-[15px] text-ink">The pro plan looks good. Is it available?</p>
                 </div>
-                <p className="mt-1 text-[12px] text-ink-muted">Alex · Instagram DM · now</p>
+                <p className="mt-1 text-[13px] text-ink-muted">Alex - Instagram DM - now</p>
               </div>
 
-              <div className="rounded-lg border border-primary/20 bg-violet-surface/40 p-3.5">
+              <div className="rounded-lg border border-primary/25 bg-violet-surface/50 p-4">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/15">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15">
                     <Bot className="h-4 w-4 text-primary" />
                   </div>
-                  <span className="text-[13px] font-semibold text-primary">AI suggestion</span>
-                  <span className="ml-auto rounded-md bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">Score 92</span>
+                  <span className="text-[14px] font-semibold text-primary">AI suggestion</span>
+                  <span className="ml-auto rounded-md bg-primary/10 px-2 py-0.5 text-[12px] font-medium text-primary">Score 92</span>
                 </div>
-                <p className="mt-2 text-[13px] leading-relaxed text-ink-secondary">
+                <p className="mt-2.5 text-[14px] leading-relaxed text-ink-secondary">
                   Reply with feature comparison and check availability. High buying intent detected — recommend scheduling a demo.
                 </p>
-                <div className="mt-2.5 flex gap-2">
-                  <button type="button" className="rounded-md bg-primary px-3 py-1.5 text-[12px] font-medium text-white">Send reply</button>
-                  <button type="button" className="rounded-md border border-line px-3 py-1.5 text-[12px] font-medium text-ink-secondary">Edit</button>
+                <div className="mt-3 flex gap-2">
+                  <button type="button" className="rounded-md bg-primary px-3.5 py-2 text-[13px] font-medium text-white">Send reply</button>
+                  <button type="button" className="rounded-md border border-line px-3.5 py-2 text-[13px] font-medium text-ink-secondary">Edit</button>
                 </div>
               </div>
             </div>
@@ -204,25 +204,25 @@ function WorkspaceFrame() {
             <div className="flex items-center gap-2.5">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-violet-surface text-[13px] font-semibold text-primary">AC</div>
               <div>
-                <p className="text-[14px] font-semibold text-ink">Alex Chen</p>
-                <p className="text-[12px] text-ink-muted">alex.c@example.com</p>
+                <p className="text-[15px] font-semibold text-ink">Alex Chen</p>
+                <p className="text-[13px] text-ink-muted">alex.c@example.com</p>
               </div>
             </div>
 
             <div className="mt-4 space-y-2.5">
               {customerFields.map((field) => (
                 <div key={field.label} className="flex items-center justify-between">
-                  <span className="text-[12px] text-ink-muted">{field.label}</span>
-                  <span className={`text-[13px] font-medium ${field.accent === 'violet' ? 'text-primary' : field.accent === 'success' ? 'text-success' : 'text-ink'}`}>{field.value}</span>
+                  <span className="text-[13px] text-ink-muted">{field.label}</span>
+                  <span className={`text-[14px] font-medium ${field.accent === 'violet' ? 'text-primary' : field.accent === 'success' ? 'text-success' : 'text-ink'}`}>{field.value}</span>
                 </div>
               ))}
             </div>
 
-            <div className="mt-4 rounded-lg border border-primary/20 bg-violet-surface/30 p-3">
-              <p className="mb-1 text-[12px] font-medium text-ink-muted">Next action</p>
+            <div className="mt-4 rounded-lg border border-primary/25 bg-violet-surface/40 p-3">
+              <p className="mb-1 text-[13px] font-medium text-ink-secondary">Next action</p>
               <div className="flex items-center gap-1.5">
-                <ArrowRight className="h-3.5 w-3.5 text-primary" />
-                <span className="text-[13px] font-medium text-primary">Schedule demo call</span>
+                <ArrowRight className="h-4 w-4 text-primary" />
+                <span className="text-[14px] font-medium text-primary">Schedule demo call</span>
               </div>
             </div>
           </div>
@@ -234,12 +234,12 @@ function WorkspaceFrame() {
                 const Icon = evt.icon
                 return (
                   <div key={evt.id} className="flex items-start gap-2.5">
-                    <div className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md ${evt.done ? 'bg-success/10 text-success' : 'bg-surface-2 text-ink-muted'}`}>
+                    <div className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md ${evt.done ? 'bg-success/10 text-success' : 'bg-surface-2 text-ink-secondary'}`}>
                       <Icon className="h-3.5 w-3.5" />
                     </div>
                     <div className="flex-1">
-                      <p className={`text-[13px] ${evt.done ? 'text-ink' : 'text-ink-secondary'}`}>{evt.action}</p>
-                      <p className="text-[12px] text-ink-muted">{evt.time}</p>
+                      <p className={`text-[14px] ${evt.done ? 'text-ink' : 'text-ink-secondary'}`}>{evt.action}</p>
+                      <p className="text-[13px] text-ink-muted">{evt.time}</p>
                     </div>
                   </div>
                 )
@@ -252,11 +252,11 @@ function WorkspaceFrame() {
       <div className="flex items-center justify-between border-t border-line bg-surface-2/30 px-5 py-2.5">
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-success" />
-          <span className="text-[12px] text-ink-secondary">AI agent online · 6 active conversations</span>
+          <span className="text-[13px] text-ink-secondary">AI agent online - 6 active conversations</span>
         </div>
         <div className="hidden items-center gap-2 sm:flex">
-          <PhoneCall className="h-3 w-3 text-ink-muted" />
-          <span className="text-[12px] text-ink-muted">AI call scheduled · Tomorrow 2pm</span>
+          <PhoneCall className="h-3.5 w-3.5 text-ink-muted" />
+          <span className="text-[13px] text-ink-muted">AI call scheduled - Tomorrow 2pm</span>
         </div>
       </div>
     </div>

@@ -48,44 +48,48 @@ export default function FinalCTA() {
 
             {/* Right: successful customer card — orbit endpoint */}
             <div className="flex items-center justify-center">
-              <div className="relative w-full max-w-[340px]">
-                {/* Faint orbit path arriving at success */}
-                <svg className="pointer-events-none absolute -left-12 top-1/2 hidden h-24 w-12 -translate-y-1/2 lg:block" viewBox="0 0 48 96" fill="none" aria-hidden="true">
-                  <path d="M 2 48 Q 24 20 46 48" stroke="#6657FF" strokeWidth="1.5" fill="none" strokeOpacity="0.3" strokeDasharray="3 4" />
-                  <circle cx="2" cy="48" r="3" fill="#6657FF" fillOpacity="0.4" />
-                  <circle cx="46" cy="48" r="3" fill="#42B883" />
+              <div className="relative w-full max-w-[380px]">
+                {/* Orbit path arriving at success */}
+                <svg className="pointer-events-none absolute -left-16 top-1/2 hidden h-32 w-16 -translate-y-1/2 lg:block" viewBox="0 0 64 128" fill="none" aria-hidden="true">
+                  <path d="M 2 64 Q 32 20 62 64" stroke="#6657FF" strokeWidth="2" fill="none" strokeOpacity="0.35" strokeDasharray="4 5" />
+                  <circle cx="2" cy="64" r="4" fill="#6657FF" fillOpacity="0.5" />
+                  <circle cx="62" cy="64" r="5" fill="#42B883" />
+                  <circle cx="62" cy="64" r="9" fill="#42B883" fillOpacity="0.2" />
                 </svg>
 
                 <OrbitSuccess
                   person="Alex Chen"
                   initials="AC"
+                  source="TikTok"
+                  intent="High"
+                  leadStage="Customer"
                   score="92"
                   campaign="Summer 2026"
                 />
 
                 {/* Outcome summary */}
                 <div className="mt-4 grid grid-cols-2 gap-3">
-                  <div className="rounded-lg border border-line bg-surface p-3">
+                  <div className="rounded-lg border border-line bg-surface p-3.5">
                     <span className="text-[12px] text-ink-muted">Source</span>
-                    <p className="text-[13px] font-medium text-ink">TikTok</p>
+                    <p className="text-[14px] font-medium text-ink">TikTok</p>
                   </div>
-                  <div className="rounded-lg border border-line bg-surface p-3">
-                    <span className="text-[12px] text-ink-muted">Intent</span>
-                    <p className="text-[13px] font-semibold text-success">High</p>
+                  <div className="rounded-lg border border-line bg-surface p-3.5">
+                    <span className="text-[12px] text-ink-muted">Channels</span>
+                    <p className="text-[14px] font-medium text-ink">4 connected</p>
                   </div>
-                  <div className="rounded-lg border border-line bg-surface p-3">
+                  <div className="rounded-lg border border-line bg-surface p-3.5">
                     <span className="text-[12px] text-ink-muted">Lead stage</span>
-                    <p className="text-[13px] font-semibold text-primary">Customer</p>
+                    <p className="text-[14px] font-semibold text-primary">Customer</p>
                   </div>
-                  <div className="rounded-lg border border-line bg-surface p-3">
+                  <div className="rounded-lg border border-line bg-surface p-3.5">
                     <span className="text-[12px] text-ink-muted">Campaign</span>
-                    <p className="text-[13px] font-medium text-ink">Completed</p>
+                    <p className="text-[14px] font-medium text-ink">Completed</p>
                   </div>
                 </div>
 
-                <div className="mt-4 flex items-center gap-2 rounded-lg border border-success/20 bg-success/5 px-4 py-3">
-                  <CheckCircle2 className="h-4 w-4 text-success" />
-                  <span className="text-[13px] font-medium text-success">Outcome: Won</span>
+                <div className="mt-4 flex items-center gap-2 rounded-lg border border-success/25 bg-success/5 px-4 py-3.5">
+                  <CheckCircle2 className="h-5 w-5 text-success" />
+                  <span className="text-[14px] font-semibold text-success">Outcome: Won</span>
                 </div>
               </div>
             </div>

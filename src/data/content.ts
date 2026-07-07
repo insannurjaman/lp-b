@@ -30,15 +30,15 @@ export interface HeroJourneyStep {
 }
 
 export const heroJourneySteps: HeroJourneyStep[] = [
-  { step: 1, label: 'Comment received', customerAction: 'How much is this?', base360Action: 'Incoming signal detected', recordUpdate: 'New conversation · TikTok' },
-  { step: 2, label: 'Public reply', customerAction: 'Awaiting response', base360Action: 'Reply generated · sent in-thread', recordUpdate: 'Status: Responded' },
-  { step: 3, label: 'Private DM', customerAction: 'Continued in DM', base360Action: 'DM thread opened · context carried', recordUpdate: 'Channel: TikTok → Instagram' },
-  { step: 4, label: 'Questions answered', customerAction: 'Interested in Pro plan', base360Action: 'Product info sent · summary created', recordUpdate: 'Interest: Pro plan' },
-  { step: 5, label: 'Qualified', customerAction: 'High buying intent', base360Action: 'Intent analysis complete · score 92', recordUpdate: 'Intent: Unknown → High' },
-  { step: 6, label: 'CRM record created', customerAction: 'Lead record active', base360Action: 'Contact created · full history attached', recordUpdate: 'Lead stage: New → Qualified' },
-  { step: 7, label: 'AI call', customerAction: 'Demo confirmed', base360Action: 'Voice call completed · tomorrow 2pm', recordUpdate: 'Next action: Schedule demo' },
-  { step: 8, label: 'Nurture campaign', customerAction: 'Campaign active', base360Action: 'Added to Summer Launch sequence', recordUpdate: 'Campaign: activated' },
-  { step: 9, label: 'Customer won', customerAction: 'Signed up', base360Action: 'Opportunity closed · revenue booked', recordUpdate: 'Lead stage: Customer · Won' },
+  { step: 1, label: 'Comment received', customerAction: 'How much is this?', base360Action: 'Incoming signal detected from TikTok', recordUpdate: 'Identity: Alex Chen · Source: TikTok' },
+  { step: 2, label: 'Public reply', customerAction: 'Awaiting response', base360Action: 'Reply generated and sent in-thread', recordUpdate: 'Activity: Public reply sent' },
+  { step: 3, label: 'Private DM', customerAction: 'Continued in DM', base360Action: 'DM thread opened · context carried over', recordUpdate: 'Channels: TikTok → TikTok, Instagram' },
+  { step: 4, label: 'Questions answered', customerAction: 'Interested in Pro plan', base360Action: 'Product info sent · conversation summarized', recordUpdate: 'Interest: Pro plan extracted' },
+  { step: 5, label: 'Intent qualified', customerAction: 'High buying intent', base360Action: 'Intent analysis complete · lead scored', recordUpdate: 'Intent: Unknown → High · Score: 92' },
+  { step: 6, label: 'CRM record created', customerAction: 'Lead record active', base360Action: 'Contact created · full history attached', recordUpdate: 'Lead stage: New → Qualified · Owner: AI Agent' },
+  { step: 7, label: 'AI call', customerAction: 'Demo confirmed', base360Action: 'Voice call completed · demo scheduled', recordUpdate: 'Next action: Demo Thu 2pm · Voice channel added' },
+  { step: 8, label: 'Campaign activated', customerAction: 'Nurture sequence started', base360Action: 'Added to Summer Launch campaign', recordUpdate: 'Campaign: None → Summer 2026 · Email added' },
+  { step: 9, label: 'Customer won', customerAction: 'Signed up', base360Action: 'Opportunity closed · revenue booked', recordUpdate: 'Lead stage: Customer · Outcome: Won' },
 ]
 
 export interface HeroOrbitNode {
@@ -68,14 +68,14 @@ export interface JourneyStep {
 }
 
 export const journeySteps: JourneyStep[] = [
-  { number: '01', title: 'Comment received', description: 'TikTok comment enters the unified inbox', icon: MessageCircle },
-  { number: '02', title: 'Public reply sent', description: 'AI responds in-thread, preserves context', icon: Send },
-  { number: '03', title: 'Private conversation', description: 'DM opened — questions answered', icon: MessageCircle },
-  { number: '04', title: 'Buying intent identified', description: 'AI detects interest and qualifies the lead', icon: Zap },
-  { number: '05', title: 'CRM lead created', description: 'Contact record with full conversation history', icon: User },
-  { number: '06', title: 'AI call completed', description: 'Voice follow-up — next step confirmed', icon: PhoneCall },
-  { number: '07', title: 'Nurture campaign', description: 'Added to the right marketing sequence', icon: Mail },
-  { number: '08', title: 'Customer converted', description: 'Opportunity closed — journey complete', icon: CheckCircle2 },
+  { number: '01', title: 'Comment', description: 'TikTok comment enters the inbox', icon: MessageCircle },
+  { number: '02', title: 'Reply', description: 'AI responds in-thread instantly', icon: Send },
+  { number: '03', title: 'DM', description: 'Private conversation with context carried', icon: MessageCircle },
+  { number: '04', title: 'Qualify', description: 'Intent detected, lead scored', icon: Zap },
+  { number: '05', title: 'CRM', description: 'Customer record with full history', icon: User },
+  { number: '06', title: 'Call', description: 'AI voice follow-up confirms next step', icon: PhoneCall },
+  { number: '07', title: 'Nurture', description: 'Added to the right campaign sequence', icon: Mail },
+  { number: '08', title: 'Customer', description: 'Opportunity closed — journey complete', icon: CheckCircle2 },
 ]
 
 export const proofBenefits = [
