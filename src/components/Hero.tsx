@@ -26,7 +26,7 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" className="relative bg-page pt-32 pb-20 sm:pt-36 md:pt-44 md:pb-28">
+    <section id="hero" className="relative bg-page pt-28 pb-16 sm:pt-32 md:pt-36 md:pb-20">
       <Container>
         <motion.div
           variants={container}
@@ -44,7 +44,7 @@ export default function Hero() {
           {/* Headline */}
           <motion.h1
             variants={item}
-            className="mt-6 max-w-[900px] font-heading text-[clamp(46px,5.8vw,78px)] font-medium leading-[1.0] tracking-[-0.02em] text-ink text-balance"
+            className="mt-5 max-w-[900px] font-heading text-[clamp(48px,6vw,84px)] font-medium leading-[1.0] tracking-[-0.02em] text-ink text-balance"
           >
             Turn every conversation into a customer journey.
           </motion.h1>
@@ -52,13 +52,13 @@ export default function Hero() {
           {/* Supporting text */}
           <motion.p
             variants={item}
-            className="mt-6 max-w-[680px] text-[17px] leading-relaxed text-ink-secondary text-pretty md:text-[18px]"
+            className="mt-5 max-w-[680px] text-[17px] leading-relaxed text-ink-secondary text-pretty md:text-[18px]"
           >
-            Base360 unifies comments, messages, calls, leads, and campaigns — then uses AI agents to move every customer toward the next best action.
+            Base360 unifies comments, messages, calls, leads, and campaigns &mdash; then uses AI agents to move every customer toward the next best action.
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={item} className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
+          <motion.div variants={item} className="mt-7 flex flex-col items-center gap-3 sm:flex-row">
             <a
               href="#contact"
               onClick={handleNavClick('#contact')}
@@ -76,11 +76,6 @@ export default function Hero() {
               See how it works
             </a>
           </motion.div>
-
-          {/* Supporting line */}
-          <motion.p variants={item} className="mt-5 text-[13px] text-ink-muted">
-            One system for every conversation.
-          </motion.p>
         </motion.div>
       </Container>
 

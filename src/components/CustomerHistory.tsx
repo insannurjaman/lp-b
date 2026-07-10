@@ -17,6 +17,7 @@ interface SummaryState {
 
 function getSummaryForEvent(index: number): SummaryState {
   if (index >= 7) return { channels: 4, intent: 'High', score: '92', stage: 'Customer', nextAction: 'Complete', campaign: 'Completed', outcome: 'Won' }
+  if (index >= 6) return { channels: 4, intent: 'High', score: '92', stage: 'Qualified', nextAction: 'Campaign', campaign: 'Active', outcome: '\u2014' }
   if (index >= 5) return { channels: 3, intent: 'High', score: '92', stage: 'Qualified', nextAction: 'Campaign', campaign: 'Active', outcome: '\u2014' }
   if (index >= 3) return { channels: 2, intent: 'High', score: '92', stage: 'Qualified', nextAction: 'Call', campaign: '\u2014', outcome: '\u2014' }
   if (index >= 2) return { channels: 2, intent: 'Medium', score: '\u2014', stage: 'New', nextAction: 'Qualify', campaign: '\u2014', outcome: '\u2014' }

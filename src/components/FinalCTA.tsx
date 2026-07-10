@@ -1,9 +1,15 @@
-import { Play, CheckCircle2 } from 'lucide-react'
+import { useRef } from 'react'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { Play, CheckCircle2, MessageCircle } from 'lucide-react'
 import Container from './Container'
 import EarlyAccessForm from './EarlyAccessForm'
-import { OrbitSuccess } from './Orbit'
+import { OrbitCore, OrbitSuccess } from './Orbit'
 
 export default function FinalCTA() {
+  const reduceMotion = useReducedMotion()
+  const sectionRef = useRef<HTMLElement>(null)
+  const inView = useInView(sectionRef, { once: true, amount: 0.2 })
+
   const handleNavClick = (href: string) => (e: React.MouseEvent) => {
     if (href.startsWith('#')) {
       e.preventDefault()
@@ -13,7 +19,7 @@ export default function FinalCTA() {
   }
 
   return (
-    <section id="contact" className="bg-page py-20 md:py-28 lg:py-36">
+    <section id="contact" ref={sectionRef} className="bg-page py-20 md:py-28 lg:py-36">
       <Container>
         <div className="relative overflow-hidden rounded-[20px] border border-line bg-surface-2">
           {/* Dotted grid texture */}
@@ -23,16 +29,31 @@ export default function FinalCTA() {
 
             {/* Left: headline + form */}
             <div className="flex flex-col justify-center">
-              <h2 className="font-heading text-[clamp(34px,4.5vw,56px)] font-medium leading-[1.02] tracking-[-0.02em] text-ink text-balance">
+              <motion.h2
+                className="font-heading text-[clamp(34px,4.5vw,56px)] font-medium leading-[1.02] tracking-[-0.02em] text-ink text-balance"
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              >
                 Your next customer may have already commented.
-              </h2>
-              <p className="mt-5 text-[18px] leading-relaxed text-ink-secondary text-pretty">
+              </motion.h2>
+              <motion.p
+                className="mt-5 text-[18px] leading-relaxed text-ink-secondary text-pretty"
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              >
                 Base360 makes sure the conversation goes somewhere.
-              </p>
+              </motion.p>
 
-              <div className="mt-8">
+              <motion.div
+                className="mt-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              >
                 <EarlyAccessForm />
-              </div>
+              </motion.div>
 
               <div className="mt-5">
                 <a
@@ -46,52 +67,74 @@ export default function FinalCTA() {
               </div>
             </div>
 
-            {/* Right: successful customer card — orbit endpoint */}
+            {/* Right: narrative closure — comment to won transformation */}
             <div className="flex items-center justify-center">
-              <div className="relative w-full max-w-[380px]">
-                {/* Orbit path arriving at success */}
-                <svg className="pointer-events-none absolute -left-16 top-1/2 hidden h-32 w-16 -translate-y-1/2 lg:block" viewBox="0 0 64 128" fill="none" aria-hidden="true">
-                  <path d="M 2 64 Q 32 20 62 64" stroke="#6657FF" strokeWidth="2" fill="none" strokeOpacity="0.35" strokeDasharray="4 5" />
-                  <circle cx="2" cy="64" r="4" fill="#6657FF" fillOpacity="0.5" />
-                  <circle cx="62" cy="64" r="5" fill="#42B883" />
-                  <circle cx="62" cy="64" r="9" fill="#42B883" fillOpacity="0.2" />
-                </svg>
+              <motion.div
+                className="relative w-full max-w-[400px]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {/* Condensed transformation: comment -> Base360 -> won */}
+                <div className="space-y-3">
+                  {/* Original comment */}
+                  <div className="rounded-xl border border-line bg-surface p-4 shadow-float">
+                    <div className="mb-2 flex items-center gap-2">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink">
+                        <MessageCircle className="h-3.5 w-3.5 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-[14px] font-semibold text-ink">TikTok comment</p>
+                        <span className="text-[12px] text-ink-muted">Alex Chen - just now</span>
+                      </div>
+                    </div>
+                    <p className="text-[15px] font-medium text-ink">&ldquo;How much is this?&rdquo;</p>
+                  </div>
 
-                <OrbitSuccess
-                  person="Alex Chen"
-                  initials="AC"
-                  source="TikTok"
-                  intent="High"
-                  leadStage="Customer"
-                  score="92"
-                  campaign="Summer 2026"
-                />
+                  {/* Signal path with Base360 core */}
+                  <div className="flex items-center justify-center gap-3 py-1">
+                    <svg viewBox="0 0 120 24" fill="none" className="h-6 w-full" aria-hidden="true">
+                      <path d="M 4 12 L 116 12" stroke="#6657FF" strokeWidth="1.5" strokeDasharray="3 4" strokeOpacity="0.4" />
+                      <circle cx="4" cy="12" r="3" fill="#6657FF" fillOpacity="0.5" />
+                      <circle cx="60" cy="12" r="4" fill="#6657FF" fillOpacity="0.3" />
+                      <circle cx="60" cy="12" r="2.5" fill="#6657FF" />
+                      <circle cx="116" cy="12" r="3" fill="#42B883" />
+                    </svg>
+                  </div>
+                  <div className="flex justify-center">
+                    <OrbitCore size={56} active={!reduceMotion && inView} complete={true} showPulse={false} showSignalDots={false} />
+                  </div>
 
-                {/* Outcome summary */}
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <div className="rounded-lg border border-line bg-surface p-3.5">
-                    <span className="text-[12px] text-ink-muted">Source</span>
-                    <p className="text-[14px] font-medium text-ink">TikTok</p>
+                  {/* Final customer record — won state */}
+                  <OrbitSuccess
+                    person="Alex Chen"
+                    initials="AC"
+                    source="TikTok"
+                    intent="High"
+                    leadStage="Customer"
+                    score="92"
+                    campaign="Summer 2026"
+                  />
+
+                  {/* Outcome grid */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-lg border border-line bg-surface p-3.5">
+                      <span className="text-[12px] text-ink-muted">Channels</span>
+                      <p className="text-[14px] font-medium text-ink">4 connected</p>
+                    </div>
+                    <div className="rounded-lg border border-line bg-surface p-3.5">
+                      <span className="text-[12px] text-ink-muted">Campaign</span>
+                      <p className="text-[14px] font-medium text-ink">Completed</p>
+                    </div>
                   </div>
-                  <div className="rounded-lg border border-line bg-surface p-3.5">
-                    <span className="text-[12px] text-ink-muted">Channels</span>
-                    <p className="text-[14px] font-medium text-ink">4 connected</p>
-                  </div>
-                  <div className="rounded-lg border border-line bg-surface p-3.5">
-                    <span className="text-[12px] text-ink-muted">Lead stage</span>
-                    <p className="text-[14px] font-semibold text-primary">Customer</p>
-                  </div>
-                  <div className="rounded-lg border border-line bg-surface p-3.5">
-                    <span className="text-[12px] text-ink-muted">Campaign</span>
-                    <p className="text-[14px] font-medium text-ink">Completed</p>
+
+                  {/* Won outcome */}
+                  <div className="flex items-center gap-2 rounded-lg border border-success/25 bg-success/5 px-4 py-3.5">
+                    <CheckCircle2 className="h-5 w-5 text-success" />
+                    <span className="text-[14px] font-semibold text-success">Outcome: Won</span>
                   </div>
                 </div>
-
-                <div className="mt-4 flex items-center gap-2 rounded-lg border border-success/25 bg-success/5 px-4 py-3.5">
-                  <CheckCircle2 className="h-5 w-5 text-success" />
-                  <span className="text-[14px] font-semibold text-success">Outcome: Won</span>
-                </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

@@ -9,6 +9,7 @@ export default function Header() {
   const [hidden, setHidden] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+  const [overDark, setOverDark] = useState(false)
   const lastScrollRef = useRef(0)
 
   useEffect(() => {
@@ -29,8 +30,15 @@ export default function Header() {
       }
       lastScrollRef.current = currentScroll
 
+      // Dark chapter detection
+      const darkSection = document.getElementById('orchestration')
+      if (darkSection) {
+        const rect = darkSection.getBoundingClientRect()
+        setOverDark(rect.top < 80 && rect.bottom > 80)
+      }
+
       // Active section tracking
-      const sections = ['hero', 'how-it-works', 'platform', 'capabilities', 'customer-history', 'contact']
+      const sections = ['hero', 'how-it-works', 'platform', 'capabilities', 'orchestration', 'customer-history', 'contact']
       for (const id of sections) {
         const el = document.getElementById(id)
         if (el) {
@@ -64,7 +72,9 @@ export default function Header() {
         <div className="mx-auto max-w-[1240px] px-4 sm:px-6">
           <header
             className={`flex items-center justify-between rounded-[14px] border transition-all duration-300 ${
-              scrolled
+              overDark
+                ? 'border-white/10 bg-chapter/90 text-chapter-text shadow-nav backdrop-blur-xl'
+                : scrolled
                 ? 'border-line bg-surface/90 shadow-nav backdrop-blur-xl'
                 : 'border-line/60 bg-surface/60 backdrop-blur-md'
             }`}
@@ -77,7 +87,7 @@ export default function Header() {
               aria-label="Base360 home"
             >
               <Base360PlatformMark size={28} />
-              <span className="font-heading text-[16px] font-semibold tracking-tight text-ink">Base360</span>
+              <span className={`font-heading text-[16px] font-semibold tracking-tight transition-colors ${overDark ? 'text-chapter-text' : 'text-ink'}`}>Base360</span>
             </a>
 
             <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main navigation">
@@ -89,7 +99,11 @@ export default function Header() {
                     href={item.href}
                     onClick={handleNavClick(item.href)}
                     className={`rounded-lg px-3.5 py-2 text-[14px] font-medium transition-colors ${
-                      isActive ? 'text-primary' : 'text-ink-secondary hover:text-ink'
+                      isActive
+                        ? 'text-primary'
+                        : overDark
+                        ? 'text-chapter-secondary hover:text-chapter-text'
+                        : 'text-ink-secondary hover:text-ink'
                     }`}
                   >
                     {item.label}
@@ -108,7 +122,7 @@ export default function Header() {
               </a>
               <button
                 onClick={() => setMenuOpen(true)}
-                className="flex h-11 w-11 items-center justify-center rounded-xl text-ink transition-colors hover:bg-surface-2 lg:hidden"
+                className={`flex h-11 w-11 items-center justify-center rounded-xl transition-colors lg:hidden ${overDark ? 'text-chapter-text hover:bg-white/10' : 'text-ink hover:bg-surface-2'}`}
                 aria-label="Open menu"
                 aria-expanded={menuOpen}
                 aria-controls="mobile-nav"

@@ -47,6 +47,17 @@
   --shadow-float: 0 4px 24px rgba(15, 15, 26, 0.06), 0 1px 4px rgba(15, 15, 26, 0.04);
   --shadow-lifted: 0 12px 48px rgba(15, 15, 26, 0.08), 0 4px 16px rgba(15, 15, 26, 0.04);
   --shadow-nav: 0 2px 12px rgba(15, 15, 26, 0.06), 0 1px 3px rgba(15, 15, 26, 0.04);
+
+  /* Easing tokens */
+  --ease-product: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-state: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Dark chapter */
+  --color-chapter: #0A0A0F;
+  --color-chapter-surface: #12121A;
+  --color-chapter-text: #ECECEF;
+  --color-chapter-secondary: #8B8B94;
+  --color-chapter-border: rgba(255, 255, 255, 0.08);
 }
 
 @layer base {
@@ -102,6 +113,19 @@
 @utility dotted-grid-sm {
   background-image: radial-gradient(circle, rgba(216, 216, 223, 0.6) 1px, transparent 1px);
   background-size: 16px 16px;
+}
+
+@utility chapter-grid {
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(102, 87, 255, 0.08), transparent 70%);
+  background-size: 24px 24px, 100% 100%;
+  background-position: 0 0, 0 0;
+}
+
+@utility pointer-depth {
+  will-change: transform;
+  transition: transform 0.4s var(--ease-product);
 }
 
 @utility orbit-active {

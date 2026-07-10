@@ -330,3 +330,137 @@ export function OrbitSuccess({ person, initials, score, campaign, source, intent
     </div>
   )
 }
+
+/* ───────────────── ChannelInput ───────────────── */
+
+interface ChannelInputProps {
+  icon: ComponentType<LucideProps>
+  label: string
+  active?: boolean
+  variant?: 'light' | 'dark'
+}
+
+export function ChannelInput({ icon: Icon, label, active = false, variant = 'light' }: ChannelInputProps) {
+  const base = variant === 'dark'
+    ? active
+      ? 'border-primary/40 bg-primary/10'
+      : 'border-chapter-border bg-chapter-surface'
+    : active
+      ? 'border-primary/30 bg-violet-surface'
+      : 'border-line bg-surface'
+
+  const textColor = variant === 'dark'
+    ? active ? 'text-primary' : 'text-chapter-secondary'
+    : active ? 'text-primary' : 'text-ink-secondary'
+
+  const iconBg = variant === 'dark'
+    ? active ? 'bg-primary/15 text-primary' : 'bg-white/5 text-chapter-secondary'
+    : active ? 'bg-primary/10 text-primary' : 'bg-surface-2 text-ink-muted'
+
+  return (
+    <div className={`flex items-center gap-3 rounded-lg border px-3.5 py-3 shadow-card transition-all duration-300 ${base}`}>
+      <div className={`flex h-8 w-8 items-center justify-center rounded-md ${iconBg}`}>
+        <Icon className="h-4 w-4" />
+      </div>
+      <span className={`text-[14px] font-medium ${textColor}`}>{label}</span>
+      {active && <span className="ml-auto h-2 w-2 animate-pulse rounded-full bg-primary" />}
+    </div>
+  )
+}
+
+/* ───────────────── ActionNode ───────────────── */
+
+interface ActionNodeProps {
+  icon: ComponentType<LucideProps>
+  label: string
+  status: 'pending' | 'active' | 'done'
+  variant?: 'light' | 'dark'
+  compact?: boolean
+}
+
+export function ActionNode({ icon: Icon, label, status, variant = 'light', compact = false }: ActionNodeProps) {
+  const isDark = variant === 'dark'
+  const done = status === 'done'
+  const active = status === 'active'
+
+  const borderBg = isDark
+    ? done ? 'border-success/25 bg-success/5' : active ? 'border-primary/40 bg-primary/10' : 'border-chapter-border bg-chapter-surface/50'
+    : done ? 'border-success/25 bg-success/5' : active ? 'border-primary/30 bg-violet-surface' : 'border-line bg-surface-2/50'
+
+  const iconColor = isDark
+    ? done ? 'text-success' : active ? 'text-primary' : 'text-chapter-secondary'
+    : done ? 'text-success' : active ? 'text-primary' : 'text-ink-muted'
+
+  const textColor = isDark
+    ? done ? 'text-chapter-text' : active ? 'text-primary' : 'text-chapter-secondary'
+    : done ? 'text-ink' : active ? 'text-primary' : 'text-ink-muted'
+
+  return (
+    <div className={`flex items-center gap-2 rounded-lg border transition-all duration-300 ${borderBg} ${compact ? 'px-2.5 py-1.5' : 'px-3 py-2'}`}>
+      {done ? (
+        <CheckCircle2 className={`shrink-0 ${compact ? 'h-3.5 w-3.5' : 'h-4 w-4'} ${iconColor}`} />
+      ) : (
+        <Icon className={`shrink-0 ${compact ? 'h-3.5 w-3.5' : 'h-4 w-4'} ${iconColor}`} />
+      )}
+      <span className={`${compact ? 'text-[12px]' : 'text-[13px]'} font-medium ${textColor}`}>{label}</span>
+    </div>
+  )
+}
+
+/* ───────────────── OutcomeState ───────────────── */
+
+interface OutcomeStateProps {
+  label: string
+  done?: boolean
+  variant?: 'light' | 'dark'
+}
+
+export function OutcomeState({ label, done = false, variant = 'light' }: OutcomeStateProps) {
+  const isDark = variant === 'dark'
+  return (
+    <div className={`flex items-center gap-2.5 rounded-lg border px-3.5 py-3 shadow-card transition-colors duration-300 ${
+      isDark
+        ? done ? 'border-success/25 bg-success/5' : 'border-chapter-border bg-chapter-surface'
+        : done ? 'border-success/20 bg-success/5' : 'border-line bg-surface'
+    }`}>
+      <div className={`flex h-7 w-7 items-center justify-center rounded-md ${
+        isDark
+          ? done ? 'bg-success/15 text-success' : 'bg-white/5 text-chapter-secondary'
+          : done ? 'bg-success/10 text-success' : 'bg-surface-2 text-ink-muted'
+      }`}>
+        {done ? <CheckCircle2 className="h-3.5 w-3.5" /> : <div className="h-2 w-2 rounded-full bg-current opacity-40" />}
+      </div>
+      <span className={`text-[14px] font-medium ${isDark ? done ? 'text-chapter-text' : 'text-chapter-secondary' : done ? 'text-ink' : 'text-ink-secondary'}`}>
+        {label}
+      </span>
+    </div>
+  )
+}
+
+/* ───────────────── JourneyProgress ───────────────── */
+
+interface JourneyProgressProps {
+  current: number
+  total: number
+  variant?: 'light' | 'dark'
+}
+
+export function JourneyProgress({ current, total, variant = 'light' }: JourneyProgressProps) {
+  const isDark = variant === 'dark'
+  const pct = (current / total) * 100
+  return (
+    <div className="flex items-center gap-3">
+      <div className="relative h-1.5 flex-1 overflow-hidden rounded-full" style={{ background: isDark ? 'rgba(255,255,255,0.08)' : '#E5E5EA' }}>
+        <motion.div
+          className="absolute inset-y-0 left-0 rounded-full"
+          style={{ background: isDark ? '#6657FF' : '#6657FF' }}
+          animate={{ width: `${pct}%` }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        />
+      </div>
+      <span className={`shrink-0 text-[13px] font-medium ${isDark ? 'text-chapter-secondary' : 'text-ink-muted'}`}>
+        {current} / {total}
+      </span>
+    </div>
+  )
+}

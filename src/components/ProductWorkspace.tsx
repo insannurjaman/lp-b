@@ -2,6 +2,7 @@ import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 import { MessageCircle, PhoneCall, Bot, ArrowRight, Sparkles } from 'lucide-react'
 import Container from './Container'
+import WorkspaceTabsMobile from './WorkspaceTabsMobile'
 import { conversations, customerFields, activityEvents, workspaceNav, workspaceAnnotations } from '../data/content'
 
 export default function ProductWorkspace() {
@@ -30,21 +31,23 @@ export default function ProductWorkspace() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
+          {/* Desktop: full workspace with perspective */}
           <div className="relative hidden lg:block" style={{ perspective: '2000px' }}>
             <div
               className="relative transition-transform duration-700"
               style={{
-                transform: inView && !reduceMotion ? 'rotateX(2deg) rotateY(-1deg)' : 'none',
+                transform: inView && !reduceMotion ? 'rotateX(1.5deg) rotateY(-0.5deg)' : 'none',
                 transformStyle: 'preserve-3d',
               }}
             >
-              <WorkspaceFrame />
+              <WorkspaceFrame inView={inView} reduceMotion={reduceMotion} />
             </div>
             <Annotations inView={inView} reduceMotion={reduceMotion} />
           </div>
 
+          {/* Mobile: tabbed workspace */}
           <div className="lg:hidden">
-            <WorkspaceFrame />
+            <WorkspaceTabsMobile />
           </div>
         </motion.div>
       </Container>
@@ -80,7 +83,7 @@ function Annotations({ inView, reduceMotion }: { inView: boolean; reduceMotion: 
   )
 }
 
-function WorkspaceFrame() {
+function WorkspaceFrame({ inView: _inView, reduceMotion: _reduceMotion }: { inView: boolean; reduceMotion: boolean | null }) {
   return (
     <div className="overflow-hidden rounded-[16px] border border-line bg-surface shadow-lifted">
       <div className="flex items-center justify-between border-b border-line bg-surface-2/50 px-5 py-3">

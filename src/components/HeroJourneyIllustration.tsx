@@ -67,7 +67,7 @@ export default function HeroJourneyIllustration() {
   const progressLabel = isProcessing ? `Step ${step} of ${TOTAL_STEPS}` : journeyState === 'completed' ? 'Complete' : 'Ready to play'
 
   return (
-    <div ref={sectionRef} className="relative mt-14 md:mt-20">
+    <div ref={sectionRef} className="relative mt-10 md:mt-14">
       <Container>
         <div
           className="relative overflow-hidden rounded-[20px] border border-line bg-gradient-to-b from-surface to-surface-2/40 shadow-lifted"

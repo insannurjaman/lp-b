@@ -183,6 +183,54 @@ export const benefits: Benefit[] = [
   { icon: TrendingUp, title: 'Move leads forward', description: 'Automated next actions prevent opportunities from becoming inactive.' },
 ]
 
+/* ───────────────── Orchestration chapter ───────────────── */
+
+export interface OrchestrationChannel {
+  id: string
+  label: string
+  icon: ComponentType<LucideProps>
+}
+
+export const orchestrationChannels: OrchestrationChannel[] = [
+  { id: 'tiktok', label: 'TikTok comment', icon: MessageCircle },
+  { id: 'instagram', label: 'Instagram DM', icon: MessageCircle },
+  { id: 'whatsapp', label: 'WhatsApp', icon: MessageCircle },
+  { id: 'sms', label: 'SMS', icon: MessageCircle },
+  { id: 'email', label: 'Email', icon: Mail },
+  { id: 'voice', label: 'Voice', icon: PhoneCall },
+]
+
+export interface OrchestrationAction {
+  id: string
+  label: string
+  icon: ComponentType<LucideProps>
+}
+
+export const orchestrationActions: OrchestrationAction[] = [
+  { id: 'reply', label: 'Reply', icon: Send },
+  { id: 'answer', label: 'Answer', icon: MessageCircle },
+  { id: 'qualify', label: 'Qualify', icon: Zap },
+  { id: 'create-lead', label: 'Create lead', icon: User },
+  { id: 'call', label: 'Call', icon: PhoneCall },
+  { id: 'follow-up', label: 'Follow up', icon: Mail },
+  { id: 'hand-off', label: 'Hand off', icon: Users },
+  { id: 'nurture', label: 'Nurture', icon: TrendingUp },
+]
+
+export interface OrchestrationOutcome {
+  id: string
+  label: string
+}
+
+export const orchestrationOutcomes: OrchestrationOutcome[] = [
+  { id: 'updated', label: 'Customer updated' },
+  { id: 'lead-created', label: 'Lead created' },
+  { id: 'call-completed', label: 'Call completed' },
+  { id: 'campaign-active', label: 'Campaign active' },
+  { id: 'human-assigned', label: 'Human assigned' },
+  { id: 'won', label: 'Customer won' },
+]
+
 /* ───────────────── Capabilities ───────────────── */
 
 export interface CapabilityChannel {
