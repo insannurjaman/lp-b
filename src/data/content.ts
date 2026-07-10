@@ -16,6 +16,7 @@ export const navItems: NavItem[] = [
   { label: 'Product', href: '#capabilities' },
   { label: 'How it works', href: '#how-it-works' },
   { label: 'Platform', href: '#platform' },
+  { label: 'Orchestration', href: '#orchestration' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -332,6 +333,7 @@ export const footerLinkGroups: FooterLinkGroup[] = [
       { label: 'Product', href: '#capabilities' },
       { label: 'How it works', href: '#how-it-works' },
       { label: 'Platform', href: '#platform' },
+      { label: 'Orchestration', href: '#orchestration' },
     ],
   },
   {
