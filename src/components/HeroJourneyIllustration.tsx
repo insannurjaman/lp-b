@@ -15,13 +15,29 @@ export default function HeroJourneyIllustration() {
   const [step, setStep] = useState(0)
   const [hasStarted, setHasStarted] = useState(false)
   const [autoPlayed, setAutoPlayed] = useState(false)
+  const [pointerOffset, setPointerOffset] = useState({ x: 0, y: 0 })
   const reduceMotion = useReducedMotion()
   const sectionRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLDivElement>(null)
   const inView = useInView(sectionRef, { once: true, amount: 0.15 })
 
   const allDone = step >= TOTAL_STEPS
   const isProcessing = hasStarted && step > 0 && !allDone
   const journeyState: JourneyState = allDone ? 'completed' : isProcessing ? 'processing' : 'idle'
+
+  // Pointer-responsive depth (desktop only, pointer devices only)
+  const handlePointerMove = (e: React.MouseEvent) => {
+    if (reduceMotion || !canvasRef.current) return
+    if (!window.matchMedia('(hover: hover) and (min-width: 1024px)').matches) return
+    const rect = canvasRef.current.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2
+    setPointerOffset({ x: x * 3, y: y * 2 })
+  }
+
+  const handlePointerLeave = () => {
+    setPointerOffset({ x: 0, y: 0 })
+  }
 
   // Autoplay once after canvas becomes visible
   useEffect(() => {
@@ -70,6 +86,9 @@ export default function HeroJourneyIllustration() {
     <div ref={sectionRef} className="relative mt-10 md:mt-14">
       <Container>
         <div
+          ref={canvasRef}
+          onMouseMove={handlePointerMove}
+          onMouseLeave={handlePointerLeave}
           className="relative overflow-hidden rounded-[20px] border border-line bg-gradient-to-b from-surface to-surface-2/40 shadow-lifted"
           style={{ perspective: '1600px' }}
           role="region"
@@ -150,8 +169,11 @@ export default function HeroJourneyIllustration() {
             {/* Mobile vertical signal path */}
             <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-gradient-to-b from-line via-primary/20 to-line lg:hidden" aria-hidden="true" />
             <div
-              className="relative grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[1fr_1.4fr_1fr] lg:gap-4"
-              style={{ transform: !reduceMotion && inView ? 'rotateX(1.5deg)' : 'none', transition: 'transform 0.8s ease' }}
+              className="pointer-depth relative grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[1fr_1.4fr_1fr] lg:gap-4"
+              style={{
+                transform: `translate(${pointerOffset.x}px, ${pointerOffset.y}px) ${!reduceMotion && inView ? 'rotateX(1.5deg)' : 'none'}`,
+                transition: 'transform 0.4s var(--ease-product)',
+              }}
             >
               {/* LEFT: Incoming conversation */}
               <div className="flex items-center justify-center">
